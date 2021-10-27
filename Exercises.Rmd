@@ -1,0 +1,154 @@
+---
+title: "Workshop 8. Categorical Variables with forcats"
+subtitle: "Working with factors - Exercises"
+author: "Zaira Gonzalez Mora & Luka Vasilj"
+output: 
+  html_document:
+    toc: TRUE
+    df_print: paged
+    number_sections: FALSE
+    highlight: tango
+    theme: lumen
+    toc_depth: 3
+    toc_float: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE, 
+                      warning = FALSE)
+
+```
+
+```{r setup, include=FALSE}
+#Packages
+library(forcats)
+library(tidyverse)
+library(foreign)
+df <- read.spss("GSS2018.sav", use.value.label=TRUE, to.data.frame=TRUE) %>%
+  select(INCOME, RELIG, NEWS, TVHOURS, AGE, MARITAL)
+```
+
+## The GSS database and **`forcats`** `r emo::ji("cat")`
+
+This data base...
+
+Using EU countries as an example, we might want to create a factor in which countries are ordered by their year of accession to the EU. For this we can use the forcats function factor()
+
+Base R has its own function to create factors, as.factor()
+
+```{r}
+eu_countries <- c("Poland", "Belgium", "Germany", "Malta", "Italy", "Spain", "Netherlands",
+                  "Denmark", "Ireland", "Greece", "France", "Portugal", "Austria",
+                  "Finland", "Cyprus", "Czechia", "Estonia", "Hungary", "Latvia",
+                  "Lithuania", "Croatia", "Slovakia", "Slovenia", "Sweden", "Bulgaria",
+                  "Luxembourg", "Romania")
+
+eu_countries_fct <- as.factor(eu_countries)
+
+eu_countries_fct
+
+```
+
+####
+
+However, this function lists those factors in alphabetical order, whereas we might want different ways of ordering our factors. Using EU countries as an example, we might want to create a factor in which countries are ordered by their year of accession to the EU. For this we can use the forcats function factor()
+
+```{r}
+country_sample <- c(sample(eu_countries, 40, replace = T))
+
+members <- c("Belgium", "France", "Germany", "Italy", "Luxembourg", "Netherlands",
+                  "Denmark", "Ireland", "Greece", "Portugal", "Spain", "Austria",
+                  "Finland", "Sweden", "Cyprus", "Czechia", "Estonia", "Hungary", "Latvia",
+                  "Lithuania", "Malta", "Poland", "Slovakia", "Slovenia", "Bulgaria",
+                  "Romania", "Croatia")
+
+factor(country_sample, levels = members)
+```
+The same can be accomplished on an existing factor using fct_relevel()
+
+A useful tool to count how many times each factor appears in a sample of data is fct_count()
+
+```{r}
+fct_count(country_sample)
+```
+
+Likewise, is we want to check all the levels that are stored in a factor (as not all factors might appear in a sample) is levels()
+
+```{r}
+#fct_relevel(name_of_factor, c(order_of_levels))
+levels(df$INCOME)
+```
+
+Reordering a factor based on the value of another variable "fct_reorder(f, x, fun)" where f is the factor, x is the variable according to which the reorder is happening, and fun is the function to determine the reordering, with median being its default.
+
+```{r}
+df %>%
+  na.omit(MARITAL) %>%
+  group_by(MARITAL) %>%
+  summarize(age = mean(as.numeric(AGE), na.rm = T)) %>%
+  ggplot(aes(age, MARITAL)) +
+  geom_point()
+```
+
+```{r}
+df_marriage <- df %>%
+  na.omit(MARITAL) %>%
+  group_by(MARITAL) %>%
+  summarize(age = mean(as.numeric(AGE), na.rm = T))
+  
+ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
+  geom_point()
+```
+
+Another powerful tool in the package is the ability to collapse factors into other factors. This is particularly useful when a factor has too many levels for an easy overview, especially if the level of granularity is too high. Take the INCOME variable from the GSS as an example:
+
+```{r}
+df %>% ggplot(aes(x = INCOME)) +
+    geom_bar()
+```
+
+It makes more sense to recategorize the data according to income classes
+
+```{r}
+df <- df %>%
+  mutate(income_brackets = fct_collapse(INCOME, 
+                                        "low" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
+                                                  "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
+                                                  "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999"),
+                                        "middle" = c("$15000 - 19999", "$20000 - 24999"),
+                                        "high" = c("$25000 OR MORE")))
+
+df %>% ggplot(aes(x = income_brackets)) +
+    geom_bar()
+```
+
+Or other groupings of data ranges:
+
+```{r}
+df <- df %>%
+  mutate(income_compressed = fct_collapse(INCOME, 
+                                        "BELOW $10000" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
+                                                  "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
+                                                  "$7000 TO 7999", "$8000 TO 9999"),
+                                        "$10000 - $19999" = c("$10000 - 14999", "$15000 - 19999"),
+                                        "$20000 OR MORE" = c("$20000 - 24999", "$25000 OR MORE")))
+
+df %>% ggplot(aes(x = income_compressed)) +
+    geom_bar()
+```
+
+Lumping levels that appear below a minimum frequency together into a single factor
+
+```{r}
+df %>% ggplot(aes(x = RELIG)) +
+    geom_bar()
+
+df %>%
+  mutate(religion = fct_lump(RELIG, n = 4)) %>%
+  group_by(religion) %>%
+  ggplot(aes(x = religion)) +
+  geom_bar()
+```
+

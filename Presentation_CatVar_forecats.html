@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to Data Science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Zaira Gonzalez Mora &amp; Luka Vasilj" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Data Science
+## Workshop 8. Categorical Variables with forcats
+### Zaira Gonzalez Mora &amp; Luka Vasilj
+### Hertie School | Berlin, Germany
+
+---
+
+
+class: inverse, center, middle
+name: categoricaldata
+
+# Welcome to your workshop on 
+&lt;br&gt;
+# Categorical Variables with forcats!
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+---
+
+
+
+# Introduction 🤓
+
+By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
+
+####  - How many times have you struggle when finding **categorical data** in your datasets? 😢
+
+&lt;br&gt;
+&lt;div align="center"&gt;
+&lt;img src="pics/dying.gif" height=200&gt;
+&lt;/div&gt;
+
+#### - Do not worry!
+
+* In this workshop we will to show you how to work with **categorical data** using the **`forcats`** tool. 
+
+* It will help you to work **factors**. But more about about in a minute.
+
+---
+# Introduction 🤓
+
+### What do we need?
+
+* To install the **`forcats`** package in R.
+&lt;br&gt;
+&lt;div align="center"&gt;
+&lt;img src="pics/forcats2.png" height=300&gt;
+&lt;/div&gt;
+
+*OR*
+
+* You can also use **`forcats`** if you have installed the tidyverse.
+
+* Or the development version from GutHub: `devtools::install_github("tidyverse/forcats")`.
+
+---
+# What are we covering in this workshop ✅
+
+.pull-left-wide[
+&lt;br&gt;
+&lt;br&gt;
+1. [Categorical Data](#categoricaldata)
+ 
+2. [Factors](#factors)
+ 
+3. [**`forcats`**!](#forcats)
+ 
+4. [Some useful functions from **`forcats`**](#functions)
+ 
+5. [AExamples/Exercices](#application)
+ 
+6. [Summary](#summary)
+ ]
+ 
+.pull-right-top[
+&lt;div align="right"&gt;
+&lt;br&gt;
+&lt;img src="pics/rstudiologo.png" height=80&gt;
+&lt;br&gt;
+&lt;/div&gt;
+]
+
+---
+class: inverse, center, middle
+name: categoricaldata
+
+# Categorical Data
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+
+---
+# Categorical Data 💹
+
+### What is categorical data?
+
+* A set or collection of **categorical variables**.
+&lt;br&gt;
+
+### What is a categorical variable? 
+
+* Categorical variables are those that have a fixed and known set of possible values.
+
+* They assign each unit of observation to a particular group or nominal category.
+
+* They represent types of data that may be divided into groups.
+
+* Examples of categorical variables: age, group, gender, educational level, income brackets.
+
+---
+
+# Categorical Data 📈
+
+### Why can categorical variables be problematic?
+
+* They are often stored with different values in a dataset and we need to differentiate category numbers and category labels. 
+
+* We need consistency to work with them properly. 😒
+
+* Thus, we need to know their *true value* not to miss important information. 
+
+&lt;br&gt;
+&lt;div align="center"&gt;
+&lt;img src="pics/strings.gif" height=200&gt;
+&lt;/div&gt;
+---
+class: inverse, center, middle
+name: factors
+
+# Factors
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+
+---
+
+# Factors 🔁
+
+### What are factors?
+
+* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values.
+
+* Factors are R's data structure for categorical data. In simpler words, **R represents categorical data with factors**.
+
+* R displays not the integers from a variable, but the levels associated with them.
+
+### Why are factors useful?
+
+* Factors in the R language allow to treat character variables in a different way.
+
+* Factors could be easier to work with than characters.
+
+* Factors are helpful for reordering character vectors in non alphabetical order and to improve display.
+
+* They allow to inspect levels in a more detailed way.
+
+* Working with factors is a nicer alternative that working only with dummies.
+
+---
+class: inverse, center, middle
+name: forcats
+
+# Hello *forcats*!
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+
+---
+# Hello *forcats*! 🐱
+
+### Nice Anagram, Hadley!
+&lt;br&gt;
+&lt;div align="center"&gt;
+&lt;img src="pics/anagram.png" height=400&gt;
+&lt;/div&gt;
+
+---
+# Hello *forcats*! 🐱
+
+### Factors in the concept of tidy data
+
+* The  **`forcats`** package provides useful tools to solve probelms with factors.
+
+* It is better to work with categorical data using tidyverse than with base R. We will see why!
+
+&lt;div align="center"&gt;
+&lt;img src="pics/cheatsheet.png" height=400&gt;
+&lt;/div&gt;
+
+---
+class: inverse, center, middle
+name: functions
+
+# *forcats*: some useful functions
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+
+---
+
+# Create a new factor: factor()
+
+## **`factor()`**
+
+* Base R has its own function to create factors, **`as.factor`**()
+
+* However, this function lists those factors in alphabetical order, whereas we might want different ways of ordering our factors. 
+
+* Instead, we can use the **`forcats`** function **`factor()`**
+
+---
+
+# Return levels of factors: levels()
+
+## **`levels()`**
+
+* Description
+
+---
+
+#Inspect factors: fct_count()
+
+## **`fct_count()`**
+
+* Description
+
+---
+
+# Change the order of levels: fct_relevel()
+
+## **`fct_relevel`**
+
+* Description
+
+---
+
+# Change the order of levels: fct_reorder()
+
+## **`fct_reorder()`**
+
+* Description
+
+---
+
+# Change the value of levels: fct_collapse()
+
+## **`fct_collapse`**
+
+* Description
+
+---
+class: inverse, center, middle
+name: resources
+
+# Summary
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"hash": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
