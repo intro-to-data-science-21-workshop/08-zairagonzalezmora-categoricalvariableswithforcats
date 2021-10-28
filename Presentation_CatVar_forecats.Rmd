@@ -55,7 +55,7 @@ library(forcats)
 ```
 # Introduction `r emo::ji("nerd")`
 
-Hello Tom!
+Hello Tom2!
 
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
