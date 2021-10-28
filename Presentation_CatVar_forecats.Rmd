@@ -55,6 +55,8 @@ library(forcats)
 ```
 # Introduction `r emo::ji("nerd")`
 
+Hello Tom!
+
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
 ####  - How many times have you struggle when finding **categorical data** in your datasets? `r emo::ji("sad")`
