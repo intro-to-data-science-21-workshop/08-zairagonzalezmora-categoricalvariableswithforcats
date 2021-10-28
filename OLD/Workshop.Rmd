@@ -1,0 +1,171 @@
+---
+title: "Workshop 8. Categorical Variables with forcats"
+subtitle: "Working with factors"
+author: "Zaira Gonzalez Mora & Luka Vasilj"
+output: 
+  html_document:
+    toc: TRUE
+    df_print: paged
+    number_sections: FALSE
+    highlight: tango
+    theme: lumen
+    toc_depth: 3
+    toc_float: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE, 
+                      warning = FALSE)
+```
+
+```{r, include = F}
+library(emojifont)
+```
+
+--- 
+
+## Introduction: Categorical Data, Factors & `forcats` `r emo::ji("nerd")`
+
+By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward and we struggle because we know that this can impact our analysis. This is always the case when we find **Categorical Data**.
+
+In this workshop we are going to show you how to treat **Categorical Data** using the **`forcats`** tool. It will help you to work with **factors**.
+
+**What do we need?**
+
+* To install the package **`forcats`** in R.
+
+![](\Users\52553\Documents\Hertie 2.0\Cursos\Semestre III\Introduction to Data Science LAB\workshop\Images/forcats.png)
+
+*Note:*
+
+* You can also use the **`forcats`** tool if you have already installed the tidyverse package.
+
+* Or the development version from GutHub: `devtools::install_github("tidyverse/forcats")`.
+
+<br>
+**What will we cover in this workshop?**
+
+ * Categorical Data
+ 
+ * What are factors?
+ 
+ * Application: why are factors useful? 
+ 
+ * Incorporating factors into the concept of tidy data: Hello **`forcats`**!
+ 
+ * Main and most useful functions from **`forcats`**
+ 
+      * The A Function 
+      
+      * The B Function 
+      
+      * The C Function
+      
+      * Etc
+      
+  * Factors with **`forcats`**: Cheat sheet
+  
+  * Bibliography
+
+
+```{r}
+
+```
+
+## Categorical Data `r emo::ji("growth")`
+
+**What is a Categorical Variable?**
+
+*"Careless data cleaning operations can lead to errors or inconsistencies in analysis"* (McNamara et all, 2007)
+
+* Categorical variables have a fixed and known set of possible values.
+
+* They represent types of data that may be divided into groups.
+
+* Examples of categorical variables: race, age, group, educational level, income brackets.
+
+
+**What is the problem with categorical variables?**
+
+* Wrangling categorical data can be difficult because many variables are often coded with numerical values.
+
+* Categorical variables are often stored with different values in a dataset. For instance, we need to differentiate category numbers and category labels. We need consistency to work with them properly. - How annoying! `r emo::ji("meh")`
+
+* We need to know their *true value* not to miss important information. 
+
+
+## What are factors? `r emo::ji("latin")`
+
+* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values.
+
+* Factors are R's data structure for categorical data. In simpler words, **R represents categorical data with factors**.
+
+* R displays not the integers from a variable, but the levels associated with them.
+
+
+## Application: why are factors useful? `r emo::ji("pencil")`
+
+* Factors in the R language allow to treat character variables in a different way.
+
+* Factors could be easier to work with than characters.
+
+* Factors are helpful for reordering character vectors in non alphabetical order and to improve display.
+
+* They allow to inspect levels in a more detailed way.
+
+* Working with factors is a nicer alternative that working only with dummies.
+
+
+## Incorporating factors into the concept of tidy data: Hello **`forcats`**! `r emo::ji("cat")`
+
+**Nice Anagram, Hadley!**
+
+![](\Users\52553\Documents\Hertie 2.0\Cursos\Semestre III\Introduction to Data Science LAB\workshop\Images/anagram.png)
+
+**Hello **`forcats`**!**
+
+* The  **`forcats`** package provides useful tools to solve probelms with factors.
+
+* It is better to work with categorical data using tidyverse than with base R. We will see why!
+
+## Main and most useful functions
+
+### The A Function
+
+* Example
+
+```{r}
+
+```
+
+### The B Function 
+
+* Example
+
+```{r}
+
+```
+
+### The C Function
+
+*Example
+
+```{r}
+
+```
+
+### Etc.
+
+*Example
+
+```{r}
+
+```
+## Factors with **`forcats`**:: Cheat Sheet 
+
+![](\Users\52553\Documents\Hertie 2.0\Cursos\Semestre III\Introduction to Data Science LAB\workshop\Images/cheatsheet.png)
+
+## Bibliography
+
