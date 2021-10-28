@@ -66,7 +66,7 @@ By now, we already know that **data cleaning** is important. We have realized th
 
 * In this workshop we will to show you how to work with **categorical data** using the **`forcats`** tool. 
 
-* It will help you to work **factors**. But more about about in a minute.
+* It will help you to work with **factors**. But more about about in a minute.
 
 ---
 # Introduction `r emo::ji("nerd")`
