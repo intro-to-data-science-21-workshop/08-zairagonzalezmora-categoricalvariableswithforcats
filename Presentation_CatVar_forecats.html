@@ -26,7 +26,7 @@ name: categoricaldata
 
 # Welcome to your workshop on 
 &lt;br&gt;
-# Categorical Variables with forcats!
+# Categorical Variables with *forcats*!
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
 ---
@@ -48,7 +48,7 @@ By now, we already know that **data cleaning** is important. We have realized th
 
 * In this workshop we will to show you how to work with **categorical data** using the **`forcats`** tool. 
 
-* It will help you to work **factors**. But more about about in a minute.
+* It will help you to work with **factors**. But more about about in a minute.
 
 ---
 # Introduction 🤓
@@ -79,11 +79,9 @@ By now, we already know that **data cleaning** is important. We have realized th
  
 3. [**`forcats`**!](#forcats)
  
-4. [Some useful functions from **`forcats`**](#functions)
+4. [Some useful functions from **`forcats`** + examples](#functions)
  
-5. [AExamples/Exercices](#application)
- 
-6. [Summary](#summary)
+5. [Summary](#summary)
  ]
  
 .pull-right-top[
@@ -122,7 +120,7 @@ name: categoricaldata
 
 ---
 
-# Categorical Data 📈
+# Categorical Data 💹
 
 ### Why can categorical variables be problematic?
 
@@ -146,13 +144,13 @@ name: factors
 
 ---
 
-# Factors 🔁
+# Factors 🔃
 
 ### What are factors?
 
-* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values.
-
 * Factors are R's data structure for categorical data. In simpler words, **R represents categorical data with factors**.
+
+* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values. [**level**: all possible 'categories' of a factor'] 
 
 * R displays not the integers from a variable, but the levels associated with them.
 
@@ -190,7 +188,7 @@ name: forcats
 
 ### Factors in the concept of tidy data
 
-* The  **`forcats`** package provides useful tools to solve probelms with factors.
+* The  **`forcats`** package provides useful tools to solve problems with factors.
 
 * It is better to work with categorical data using tidyverse than with base R. We will see why!
 
@@ -208,23 +206,128 @@ name: functions
 
 ---
 
-# Create a new factor: factor()
+# Create a new factor: factor(), as_factor
 
 ## **`factor()`**
 
-* Base R has its own function to create factors, **`as.factor`**()
+### Description
 
-* However, this function lists those factors in alphabetical order, whereas we might want different ways of ordering our factors. 
+* Base R has its own function to create factors, **`as.factor()`**, which basically encode a vector as factor. However, this function lists the levels of the factors in alphabetical order, whereas we might need different ways to ordering factors. 
 
-* Instead, we can use the **`forcats`** function **`factor()`**
+* Instead, we can use the **`factor()`** function from **`forcats`**.
+
+* **`factor()`** will create an ordered factor with assigned levels.
+
+* You can also convert an input to a factor with **`as_factor`**.
+
+* When x is a character, **`as_factor`** creates levels in the order in which they appear.
+
+* When x is numeric, the ordering is based on the numeric value.
 
 ---
 
-# Return levels of factors: levels()
+# Create a new factor: factor(), as_factor
 
-## **`levels()`**
+We are going to use the **General Social Survey (GSS)**, a product of the National Data Program for the social Sciences from the United States. It contains data on many factors of social life. 
 
-* Description
+* You can find it here: https://gss.norc.org/get-the-data
+
+
+
+
+```r
+R&gt; #Create vector
+R&gt; eu_countries &lt;- c("Poland", "Belgium", "Germany", "Malta", "Italy", "Spain", "Netherlands",
++                   "Denmark", "Ireland", "Greece", "France", "Portugal", "Austria",
++                   "Finland", "Cyprus", "Czechia", "Estonia", "Hungary", "Latvia",
++                   "Lithuania", "Croatia", "Slovakia", "Slovenia", "Sweden", "Bulgaria",
++                   "Luxembourg", "Romania")
+R&gt; eu_countries
+```
+
+```
+##  [1] "Poland"      "Belgium"     "Germany"     "Malta"       "Italy"      
+##  [6] "Spain"       "Netherlands" "Denmark"     "Ireland"     "Greece"     
+## [11] "France"      "Portugal"    "Austria"     "Finland"     "Cyprus"     
+## [16] "Czechia"     "Estonia"     "Hungary"     "Latvia"      "Lithuania"  
+## [21] "Croatia"     "Slovakia"    "Slovenia"    "Sweden"      "Bulgaria"   
+## [26] "Luxembourg"  "Romania"
+```
+
+---
+# Create a new factor: factor(), as_factor
+
+#### Using base R **`as.factor`** we would have this
+
+
+```r
+R&gt; eu_countries_fct &lt;- as.factor(eu_countries)
+R&gt; 
+R&gt; eu_countries_fct
+```
+
+```
+##  [1] Poland      Belgium     Germany     Malta       Italy       Spain      
+##  [7] Netherlands Denmark     Ireland     Greece      France      Portugal   
+## [13] Austria     Finland     Cyprus      Czechia     Estonia     Hungary    
+## [19] Latvia      Lithuania   Croatia     Slovakia    Slovenia    Sweden     
+## [25] Bulgaria    Luxembourg  Romania    
+## 27 Levels: Austria Belgium Bulgaria Croatia Cyprus Czechia Denmark ... Sweden
+```
+
+---
+# Create a new factor: factor(), as_factor
+
+#### But what of we want to create a factor in which countries are ordered by their year of accession to the EU?
+
+#### Let's see how it would work with **`factor()`**
+
+
+```r
+R&gt; country_sample &lt;- c(sample(eu_countries, 40, replace = T))
+R&gt; 
+R&gt; members &lt;- c("Belgium", "France", "Germany", "Italy", "Luxembourg", "Netherlands",
++                   "Denmark", "Ireland", "Greece", "Portugal", "Spain", "Austria",
++                   "Finland", "Sweden", "Cyprus", "Czechia", "Estonia", "Hungary", "Latvia",
++                   "Lithuania", "Malta", "Poland", "Slovakia", "Slovenia", "Bulgaria",
++                   "Romania", "Croatia")
+R&gt; 
+R&gt; factor(country_sample, levels = members)
+```
+
+```
+##  [1] Luxembourg  Austria     Estonia     Malta       Finland     Czechia    
+##  [7] Belgium     Netherlands Croatia     Latvia      Spain       Bulgaria   
+## [13] Poland      France      Ireland     Finland     Portugal    Netherlands
+## [19] Bulgaria    Italy       Malta       Croatia     Poland      Germany    
+## [25] Spain       France      Romania     Czechia     Estonia     Luxembourg 
+## [31] Finland     Poland      Malta       Croatia     Italy       Ireland    
+## [37] Hungary     Greece      Poland      Croatia    
+## 27 Levels: Belgium France Germany Italy Luxembourg Netherlands ... Croatia
+```
+
+---
+
+# Change levels of factors: fct_relevel
+
+
+## **`fct_relevel()`**
+
+### Description
+
+* Factors in R come ordered and unordered. 
+
+* Examples: small, medium, large (ordered); pen, brush, pencil (unorderded).
+
+* If the factor is ordered, then the specific order of the levels matters (small &lt; medium &lt; large).
+
+* If they're not, we need to determine the levels according our needs (maybe pencil, pen, brush?).
+
+* **`fct_relevel()`** are useful to change the order in which the levels of a factor appear. 
+
+* **`fct_relevel()`** reorders factor labels by hand.
+
+* So, we could have also used **`fct_relevel()`** to do what did with **`as_factor`**.
 
 ---
 
@@ -232,39 +335,218 @@ name: functions
 
 ## **`fct_count()`**
 
-* Description
+### Description
+
+* This function is useful to count how many times each factor appears in a sample of data.
+
+* It counts the number of values with each level.
+
+* Addtionally, we can also check if all the levels are stored in a factor (not all factors might appear in a sample) with **`levels()`** 
+
+* It also possible to the unique values and removing duplicates with **`fct_unique()`**
 
 ---
+#Inspect factors: fct_count()
 
-# Change the order of levels: fct_relevel()
+Following our example:
 
-## **`fct_relevel`**
 
-* Description
+```r
+R&gt; #Count the times the name of a country is repeated
+R&gt; 
+R&gt; fct_count(country_sample, head(14))
+```
 
+```
+## # A tibble: 21 x 2
+##    f            n
+##    &lt;fct&gt;    &lt;int&gt;
+##  1 Croatia      4
+##  2 Poland       4
+##  3 Finland      3
+##  4 Malta        3
+##  5 Bulgaria     2
+##  6 Czechia      2
+##  7 Estonia      2
+##  8 France       2
+##  9 Ireland      2
+## 10 Italy        2
+## # ... with 11 more rows
+```
+---
+
+# Inspect factors: levels()
+
+## **`levels()`**
+
+### Description
+
+ * We could also check all the levels that are stored in a factor, as not all factors might appear in a sample.
+
+* **`levels()`** returns/set the levels of a factor.
+
+From our example:
+
+```r
+R&gt; #Check stored levels by income
+R&gt; 
+R&gt; levels(df$INCOME)
+```
+
+```
+##  [1] "LT $1000"       "$1000 TO 2999"  "$3000 TO 3999"  "$4000 TO 4999" 
+##  [5] "$5000 TO 5999"  "$6000 TO 6999"  "$7000 TO 7999"  "$8000 TO 9999" 
+##  [9] "$10000 - 14999" "$15000 - 19999" "$20000 - 24999" "$25000 OR MORE"
+```
 ---
 
 # Change the order of levels: fct_reorder()
 
 ## **`fct_reorder()`**
 
-* Description
+### Description
+
+* This function will reorder a factor based on the value of another variable, *i.e.*, it will reorder the levels by their relationship with that other variable.
+
+* The argument to use this function is **`fct_reorder(f, x, fun)`**, where *f* is the factor, *x* is the variable according to which the reorder is happening, and *fun* is the function to determine the reordering, with the median being its default.
+
+Going back to our example:
+
+
+```r
+R&gt; #Create a plot
+R&gt; df %&gt;%
++   na.omit(MARITAL) %&gt;%
++   group_by(MARITAL) %&gt;%
++   summarize(age = mean(as.numeric(AGE), na.rm = T)) %&gt;%
++   ggplot(aes(age, MARITAL)) +
++   geom_point()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+```r
+R&gt; #Reorder plot!
+R&gt; df_marriage &lt;- df %&gt;%
++   na.omit(MARITAL) %&gt;%
++   group_by(MARITAL) %&gt;%
++   summarize(age = mean(as.numeric(AGE), na.rm = T))
+R&gt;   
+R&gt; ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
++   geom_point()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-
 # Change the value of levels: fct_collapse()
 
 ## **`fct_collapse`**
 
-* Description
+### Description
 
+* **`forcats`** also allows to to collapse factors into other factors.
+
+* This is particularly useful when a factor has too many levels for an easy overview, especially if the level of granularity is too high.
+
+*  **`fct_collapse`** Collapses levels into manually defined groups.
+
+Let's take the INCOME variable from our GSS as an example:
+
+
+```r
+R&gt; df %&gt;% ggplot(aes(x = INCOME)) +
++     geom_bar()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+---
+# Change the value of levels: fct_collapse()
+
+* It makes more sense to recategorize the data according to income classes so we use **`fct_collapse`**:
+
+
+```r
+R&gt; df &lt;- df %&gt;%
++   mutate(income_brackets = fct_collapse(INCOME, 
++                                         "low" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
++                                                   "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
++                                                   "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999"),
++                                         "middle" = c("$15000 - 19999", "$20000 - 24999"),
++                                         "high" = c("$25000 OR MORE")))
+R&gt; 
+R&gt; df %&gt;% ggplot(aes(x = income_brackets)) +
++     geom_bar()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+* OR other groupings of data ranges:
+
+
+```r
+R&gt; df %&gt;% ggplot(aes(x = RELIG)) +
++     geom_bar()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+```r
+R&gt; df %&gt;%
++   mutate(religion = fct_lump(RELIG, n = 4)) %&gt;%
++   group_by(religion) %&gt;%
++   ggplot(aes(x = religion)) +
++   geom_bar()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-11-2.png" style="display: block; margin: auto;" /&gt;
+---
+
+# Change the value of levels: fct_collapse()
+
+* Lumping levels that appear below a minimum frequency together into a single factor
+
+
+```r
+R&gt; df %&gt;% ggplot(aes(x = RELIG)) +
++     geom_bar()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+```r
+R&gt; df %&gt;%
++   mutate(religion = fct_lump(RELIG, n = 4)) %&gt;%
++   group_by(religion) %&gt;%
++   ggplot(aes(x = religion)) +
++   geom_bar()
+```
+
+&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-12-2.png" style="display: block; margin: auto;" /&gt;
 ---
 class: inverse, center, middle
-name: resources
+name: summary
 
 # Summary
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
+
+---
+
+# Summary
+
+* Factors are R's data structure for categorical data.
+
+* Categorical date is a set or collection of categorical variables.
+
+* Categorical variables assign units of observation to a particular group or nominal category.
+
+* Factors could be easier to work with than characters.
+
+* The **`forcats`** package provides useful tools to solve problems with factors.
+
+* Most useful functions from the **`forcats`** package.
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

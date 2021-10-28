@@ -1,0 +1,41 @@
+For emojis:
+
+https://notes.peter-baumgartner.net/2021/04/19/using-emojis-in-r-and-rmarkdown/
+https://www.rdocumentation.org/packages/emo/versions/0.0.0.9000
+https://github.com/muan/emojilib/
+https://stackoverflow.com/questions/60906263/which-is-the-full-emoji-list-that-i-can-use-with-rmarkdown
+https://github.com/hadley/emo  ----> THE BEST
+
+To insert images (super useful!!)
+https://www.earthdatascience.org/courses/earth-analytics/document-your-science/add-images-to-rmarkdown-report/
+https://stackoverflow.com/questions/25166624/insert-picture-table-in-r-markdown/25167279
+
+For the R Markdown script (also super useful)
+https://monashbioinformaticsplatform.github.io/2017-11-16-open-science-training/topics/rmarkdown.html
+
+Simpson Font generator
+https://www.thewordfinder.com/simpsons-font-generator/
+
+Actual bibliography
+https://peerj.com/preprints/3163/
+https://r4ds.had.co.nz/factors.html
+https://forcats.tidyverse.org/
+https://forcats.tidyverse.org/reference/index.html
+https://www.r-bloggers.com/2020/06/working-with-factors-in-r-tutorial-forcats-package/
+https://bookdown.org/f_lennert/introduction-to-r/workwithfactors.html
+https://cran.r-project.org/web/packages/forcats/forcats.pdf
+https://cran.r-project.org/web/packages/forcats/index.html
+https://cran.r-project.org/web/packages/forcats/vignettes/forcats.html
+http://www.stat.yale.edu/Courses/1997-98/101/catdat.htm
+https://www.formpl.us/blog/categorical-data
+https://www.analyticsvidhya.com/blog/2015/11/easy-methods-deal-categorical-variables-predictive-modeling/
+https://www.sciencedirect.com/topics/computer-science/categorical-variable
+
+Maybe we should consider this:
+https://stats.idre.ucla.edu/other/mult-pkg/whatstat/what-is-the-difference-between-categorical-ordinal-and-interval-variables/
+
+GIF
+https://giphy.com/gifs/season-16-the-simpsons-16x16-xT5LMIPOBXmmVuoLQI
+
+Tidy Data!!
+https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html
