@@ -25,130 +25,81 @@ knitr::opts_chunk$set(echo = TRUE,
 #Packages
 library(forcats)
 library(tidyverse)
-library(foreign)
-df <- read.spss("GSS2018.sav", use.value.label=TRUE, to.data.frame=TRUE) %>%
-  select(INCOME, RELIG, NEWS, TVHOURS, AGE, MARITAL)
+ds <- gss_cat
 ```
+
+Now that we've gone through the basics, let's put this to practice!
+
+1) First, let's try to make a factor out of the days of the week. As you can see from the base R `as.factor()` function below, the factor may have been created, but the levels within it are listed alphabetically - not particularly useful if you want to have the days of the week in order.
+
+```{r}
+day_of_week <- c("Monday", "Tuesday", "Wednesday", "Thursday", 
+                 "Friday", "Saturday", "Sunday")
+
+day_of_week_fct <- as.factor(day_of_week)
+
+day_of_week_fct
+```
+a) Let's try creating a factor using the `factor(f, levels = x)` function. The function takes two arguments: the factor itself, typically a column in your dataset; and a list containing the levels of that factor.
+
+```{r}
+week <- c(sample(day_of_week, 40, replace = T))
+
+
+```
+
+b) Now you're magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the `fct_relevel(f, )` function to reorganize the levels. The function takes two arguments: the factor you want releveled, and a list containing the newly ordered levels. (Hint: it's pretty much identical to creating a factor, except you can only perform this on an existing factor as the first argument)
+
+```{r}
+
+```
+
+Likewise, if we want to check all the levels that are stored in a factor (as not all factors might appear in a sample) is `levels()`.
+
+There are plenty of other functions used to reorder factors:
+- `fct_rev()` reverses the order of the levels in the factor.
+- `fct_infreq()` orders the levels according to the frequency in which they appear.
+- `fct_inorder()` orders the levels in the order in which they appear.
+- `fct_shift()` shifts the levels of a factor by one to each side.
+- `fct_shuffle()` randomizes the levels of a factor.
 
 ## The GSS database and **`forcats`** `r emo::ji("cat")`
 
-This data base...
+2) The forcats package already has a built-in dataset from the General Social Survey that can be called with `gss_cat`. This dataset was crafted specifically for the purpose of getting to know the forcats package, and contains categorical variables already transformed into factors. Let's load the dataset and practice the other functions from the package. #levels(df$INCOME)
 
-Using EU countries as an example, we might want to create a factor in which countries are ordered by their year of accession to the EU. For this we can use the forcats function factor()
-
-Base R has its own function to create factors, as.factor()
+a) First, let's take a look at the factors already present in the dataset (six out of the nine columns are factors). Using the `levels()` function, we can take a look at the levels in each factor. From the six variables, are there any that are perhaps too detailed and could be collapsed into smaller groups?
 
 ```{r}
-eu_countries <- c("Poland", "Belgium", "Germany", "Malta", "Italy", "Spain", "Netherlands",
-                  "Denmark", "Ireland", "Greece", "France", "Portugal", "Austria",
-                  "Finland", "Cyprus", "Czechia", "Estonia", "Hungary", "Latvia",
-                  "Lithuania", "Croatia", "Slovakia", "Slovenia", "Sweden", "Bulgaria",
-                  "Luxembourg", "Romania")
-
-eu_countries_fct <- as.factor(eu_countries)
-
-eu_countries_fct
 
 ```
 
-####
-
-However, this function lists those factors in alphabetical order, whereas we might want different ways of ordering our factors. Using EU countries as an example, we might want to create a factor in which countries are ordered by their year of accession to the EU. For this we can use the forcats function factor()
+b) The partyid variable might be a little too detailed for visualization purposes. Let's collapse the levels in this factor into more aggregated groups: Democrats, Independents, Republicans, and Other using the `fct_collapse()` function. To preserve the original categorization, create a new variable in the dataset and assign it the new factor.
 
 ```{r}
-country_sample <- c(sample(eu_countries, 40, replace = T))
 
-members <- c("Belgium", "France", "Germany", "Italy", "Luxembourg", "Netherlands",
-                  "Denmark", "Ireland", "Greece", "Portugal", "Spain", "Austria",
-                  "Finland", "Sweden", "Cyprus", "Czechia", "Estonia", "Hungary", "Latvia",
-                  "Lithuania", "Malta", "Poland", "Slovakia", "Slovenia", "Bulgaria",
-                  "Romania", "Croatia")
-
-factor(country_sample, levels = members)
 ```
-The same can be accomplished on an existing factor using fct_relevel()
 
-A useful tool to count how many times each factor appears in a sample of data is fct_count()
+c) The denom variable lists the denominations of Protestant respondents. However, there are again too many different levels for it to be easily visually interpretable. Using `fct_lump()`, try creating a new dataset containing only those respondents that are Protestant, leaving only the top 5 denominations - the remainder will be lumped into "Other". `fct_lump()` takes two arguments: the first is your factor, the second is `n = ` followed by the number of top categories you want to remain.
 
 ```{r}
-fct_count(country_sample)
+
 ```
 
-Likewise, is we want to check all the levels that are stored in a factor (as not all factors might appear in a sample) is levels()
+
+d)i) Using the above dataset listing the denominations, let us try to see which of the denominations watches tv the most, on average, and plot it in a bar graph. 
 
 ```{r}
-#fct_relevel(name_of_factor, c(order_of_levels))
-levels(df$INCOME)
+
 ```
 
-Reordering a factor based on the value of another variable "fct_reorder(f, x, fun)" where f is the factor, x is the variable according to which the reorder is happening, and fun is the function to determine the reordering, with median being its default.
+ii) The plot, while accurate, doesn't order the levels of the factor in a visually appealing way. Forcats to the rescue! We can order the factors according to their relationship with another variable using `fct_reorder()`, which takes two arguments: the factor we want reordered, and the variable according to which we want it reordered.
 
 ```{r}
-df %>%
-  na.omit(MARITAL) %>%
-  group_by(MARITAL) %>%
-  summarize(age = mean(as.numeric(AGE), na.rm = T)) %>%
-  ggplot(aes(age, MARITAL)) +
-  geom_point()
+
 ```
 
-```{r}
-df_marriage <- df %>%
-  na.omit(MARITAL) %>%
-  group_by(MARITAL) %>%
-  summarize(age = mean(as.numeric(AGE), na.rm = T))
-  
-ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
-  geom_point()
-```
+And that's that!
 
-Another powerful tool in the package is the ability to collapse factors into other factors. This is particularly useful when a factor has too many levels for an easy overview, especially if the level of granularity is too high. Take the INCOME variable from the GSS as an example:
+Forcats let's us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles! 
 
-```{r}
-df %>% ggplot(aes(x = INCOME)) +
-    geom_bar()
-```
-
-It makes more sense to recategorize the data according to income classes
-
-```{r}
-df <- df %>%
-  mutate(income_brackets = fct_collapse(INCOME, 
-                                        "low" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
-                                                  "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
-                                                  "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999"),
-                                        "middle" = c("$15000 - 19999", "$20000 - 24999"),
-                                        "high" = c("$25000 OR MORE")))
-
-df %>% ggplot(aes(x = income_brackets)) +
-    geom_bar()
-```
-
-Or other groupings of data ranges:
-
-```{r}
-df <- df %>%
-  mutate(income_compressed = fct_collapse(INCOME, 
-                                        "BELOW $10000" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
-                                                  "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
-                                                  "$7000 TO 7999", "$8000 TO 9999"),
-                                        "$10000 - $19999" = c("$10000 - 14999", "$15000 - 19999"),
-                                        "$20000 OR MORE" = c("$20000 - 24999", "$25000 OR MORE")))
-
-df %>% ggplot(aes(x = income_compressed)) +
-    geom_bar()
-```
-
-Lumping levels that appear below a minimum frequency together into a single factor
-
-```{r}
-df %>% ggplot(aes(x = RELIG)) +
-    geom_bar()
-
-df %>%
-  mutate(religion = fct_lump(RELIG, n = 4)) %>%
-  group_by(religion) %>%
-  ggplot(aes(x = religion)) +
-  geom_bar()
-```
-
+These exercises showed the basics, but in case of any doubt (or if you want to learn more), please consult the cheatsheet found here by blah blah.
