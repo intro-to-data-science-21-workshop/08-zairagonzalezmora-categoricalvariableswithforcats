@@ -14,9 +14,7 @@ output:
       ratio: '16:9'
       hash: true
 ---
-
 class: inverse, center, middle
-name: categoricaldata
 
 # Welcome to your workshop on 
 <br>
@@ -52,10 +50,40 @@ library(tidyverse)
 library(emojifont)
 library(foreign)
 library(forcats)
+library(kableExtra)
 ```
-# Introduction `r emo::ji("nerd")`
 
-Hello Tom2!
+# What are we covering in this workshop `r emo::ji("check")`
+
+.pull-left-wide[
+
+1. [Introduction](#introduction)
+
+2. [Categorical Data](#categoricaldata)
+ 
+3. [Factors](#factors)
+ 
+4. [**`forcats`**!](#forcats)
+ 
+5. [Some useful functions from **`forcats`** + examples](#functions) 
+
+      * [`factor()`](#factor)
+      * [`as_factor()`](#factor)
+      * [`fct_relevel`](#relevel)
+      * [`fct_count`](#count)
+      * [`fct_unique`](#unique)
+      * [`levels()`](#levels)
+      * [`fct_reorder`](#reorder)
+      * [`fct_collapse`](#collapse)
+ 
+6. [Summary](#summary)
+ ]
+
+
+---
+name: introduction
+
+# Introduction `r emo::ji("nerd")`
 
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
@@ -73,6 +101,7 @@ By now, we already know that **data cleaning** is important. We have realized th
 * It will help you to work with **factors**. But more about about in a minute.
 
 ---
+
 # Introduction `r emo::ji("nerd")`
 
 ### What do we need?
@@ -87,32 +116,7 @@ By now, we already know that **data cleaning** is important. We have realized th
 
 * You can also use **`forcats`** if you have installed the tidyverse.
 
-* Or the development version from GutHub: `devtools::install_github("tidyverse/forcats")`.
-
----
-# What are we covering in this workshop `r emo::ji("check")`
-
-.pull-left-wide[
-<br>
-<br>
-1. [Categorical Data](#categoricaldata)
- 
-2. [Factors](#factors)
- 
-3. [**`forcats`**!](#forcats)
- 
-4. [Some useful functions from **`forcats`** + examples](#functions)
- 
-5. [Summary](#summary)
- ]
- 
-.pull-right-top[
-<div align="right">
-<br>
-<img src="pics/rstudiologo.png" height=80>
-<br>
-</div>
-]
+* Or the development version from GitHub: `devtools::install_github("tidyverse/forcats")`.
 
 ---
 class: inverse, center, middle
@@ -140,6 +144,14 @@ name: categoricaldata
 
 * Examples of categorical variables: age, group, gender, educational level, income brackets.
 
+* Categorical variables can be used to represent different types of qualitative data.
+
+  * Nominal: two or more categories with no particular order (yes/no, gender, ethnicity).
+  
+  * Ordinal: ordered or ranked categories (movie ratings, education degrees).
+  
+  * Interval: intervals between the values of the variable are equally spaced (temperature, weight).
+
 ---
 
 # Categorical Data `r emo::ji("growth")`
@@ -166,13 +178,13 @@ name: factors
 
 ---
 
-# Factors `r emo::ji("clockwise")`
+# Factors `r emo::ji("letters")`
 
 ### What are factors?
 
-* Factors are R's data structure for categorical data. In simpler words, **R represents categorical data with factors**.
+* Factors are R's data structure for categorical data: **R represents categorical data with factors**.
 
-* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values. [**level**: all possible 'categories' of a factor'] 
+* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values. [level: all possible 'categories' of a factor] 
 
 * R displays not the integers from a variable, but the levels associated with them.
 
@@ -227,18 +239,21 @@ name: functions
 <html><div style='float:left'></div><hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/></html>
 
 ---
+name: factor
 
-# Create a new factor: factor(), as_factor
+# Create a new factor:  *factor()*, *as_factor*
 
 ## **`factor()`**
 
 ### Description
 
-* Base R has its own function to create factors, **`as.factor()`**, which basically encode a vector as factor. However, this function lists the levels of the factors in alphabetical order, whereas we might need different ways to ordering factors. 
+* Base R has its own function to create factors, **`as.factor()`**, which basically encodes a vector as factor. However, this function lists the levels of the factors in alphabetical order, whereas we might need to order levels in a different way. 
 
-* Instead, we can use the **`factor()`** function from **`forcats`**.
+* Instead of using base R, we can use the **`factor()`** function from **`forcats`**.
 
 * **`factor()`** will create an ordered factor with assigned levels.
+
+## **`as_factor`**
 
 * You can also convert an input to a factor with **`as_factor`**.
 
@@ -248,18 +263,10 @@ name: functions
 
 ---
 
-# Create a new factor: factor(), as_factor
+# Create a new factor:  *factor()*, *as_factor*
 
-We are going to use the **General Social Survey (GSS)**, a product of the National Data Program for the social Sciences from the United States. It contains data on many factors of social life. 
-
-* You can find it here: https://gss.norc.org/get-the-data
-
-```{r, include=FALSE}
-#Load dataset
-df <- read.spss("GSS2018.sav", use.value.label=TRUE, to.data.frame=TRUE) %>%
-  select(INCOME, RELIG, NEWS, TVHOURS, AGE, MARITAL)
-
-```
+#### Let's start from zero to show you how it works:
+<br>
 
 ```{r}
 #Create vector
@@ -273,9 +280,10 @@ eu_countries
 ```
 
 ---
-# Create a new factor: factor(), as_factor
+# Create a new factor:  *factor()*, *as_factor*
 
-#### Using base R **`as.factor`** we would have this
+#### With base R **`as.factor`** our output would be the following:
+<br>
 
 ```{r}
 eu_countries_fct <- as.factor(eu_countries)
@@ -285,11 +293,11 @@ eu_countries_fct
 ```
 
 ---
-# Create a new factor: factor(), as_factor
+# Create a new factor:  *factor()*, *as_factor*
 
-#### But what of we want to create a factor in which countries are ordered by their year of accession to the EU?
+#### But... what if we want to see countries ordered by their year of accession to the EU?
 
-#### Let's see how it would work with **`factor()`**
+* Let's see how it would work with **`factor()`**
 
 ```{r}
 country_sample <- c(sample(eu_countries, 40, replace = T))
@@ -304,8 +312,9 @@ factor(country_sample, levels = members)
 ```
 
 ---
+name: relevel
 
-# Change levels of factors: fct_relevel
+# Change levels of factors:  *fct_relevel*
 
 
 ## **`fct_relevel()`**
@@ -320,15 +329,16 @@ factor(country_sample, levels = members)
 
 * If they're not, we need to determine the levels according our needs (maybe pencil, pen, brush?).
 
-* **`fct_relevel()`** are useful to change the order in which the levels of a factor appear. 
+* **`fct_relevel()`** is useful to change the order in which the levels of a factor appear. 
 
 * **`fct_relevel()`** reorders factor labels by hand.
 
-* So, we could have also used **`fct_relevel()`** to do what did with **`as_factor`**.
+* If we think about it, we could have also used **`fct_relevel()`** to do what did with **`as_factor`**.
 
 ---
+name: count
 
-#Inspect factors: fct_count()
+#Inspect factors:  *fct_count()*
 
 ## **`fct_count()`**
 
@@ -336,46 +346,90 @@ factor(country_sample, levels = members)
 
 * This function is useful to count how many times each factor appears in a sample of data.
 
-* It counts the number of values with each level.
+* It counts the number of values with each level (count entries in a factor).
 
-* Addtionally, we can also check if all the levels are stored in a factor (not all factors might appear in a sample) with **`levels()`** 
+* Usage: fct_count(f, sort = FALSE, prop = FALSE), where *f* is a factor.
 
-* It also possible to the unique values and removing duplicates with **`fct_unique()`**
+    * If *sort* is TRUE, the most common values float to the top will be shown.
+    
+    * If *prop* is TRUE, the fraction of marginal table will be computed.
+
+* Before counting, it might be useful to remove duplicates. We can do this with **`fct_unique()`**. 
 
 ---
-#Inspect factors: fct_count()
+#Inspect factors:  *fct_count()*
 
-Following our example:
+#### Following our example:
 
 ```{r}
 #Count the times the name of a country is repeated
 
-fct_count(country_sample, head(14))
+fct_count(country_sample, head(12))
 
 ```
 ---
+#Inspect factors:  *fct_count()*
 
-# Inspect factors: levels()
+#### See what happens when sorting:
+
+```{r}
+#Count the times the name of a country is repeated
+
+fct_count(country_sample, sort = TRUE, head(12))
+
+```
+---
+name: levels
+
+# Inspect factors:  *levels()*
 
 ## **`levels()`**
 
 ### Description
 
- * We could also check all the levels that are stored in a factor, as not all factors might appear in a sample.
+* **`levels()`** returns/set the levels of a factor: levels(f); levels(f) <- c("x","y","z")
+ 
+* This function allows to check all the levels that are stored in a factor, as not all factors might appear in a sample. Before counting (**`fct_count()`**), for instance, we might want to check this.
 
-* **`levels()`** returns/set the levels of a factor.
+For this part, we are going to use the **General Social Survey (GSS)** dataset, a product of the National Data Program for the social Sciences from the United States.
 
-From our example:
+* It contains demographic, behavioral, and attitudinal questions, plus topics of special interest from adults. 
+
+* Among the topics covered are civil liberties, crime and violence, intergroup tolerance, morality, national spending priorities, psychological well-being, social mobility, and stress and traumatic events. 
+
+  * So, a lot of categorical data, right?
+
+* You can find it here: https://gss.norc.org/get-the-data
+
+---
+# Inspect factors:  *levels()*
+
+```{r, include=FALSE}
+#Load dataset
+df <- read.spss("GSS2018.sav", use.value.label=TRUE, to.data.frame=TRUE) %>%
+  select(INCOME, RELIG, NEWS, TVHOURS, AGE, MARITAL)
+
+```
+
+#### From our GSS data base, we want to see all the levels stored in the income factor: 
+
 ```{r}
-
-#Check stored levels by income
 
 levels(df$INCOME)
 
 ```
----
 
-# Change the order of levels: fct_reorder()
+#### We also want explore the levels in the religion factor:
+
+```{r}
+
+levels(df$RELIG)
+
+```
+---
+name: reorder
+
+# Change the order of levels:  *fct_reorder()*
 
 ## **`fct_reorder()`**
 
@@ -385,10 +439,10 @@ levels(df$INCOME)
 
 * The argument to use this function is **`fct_reorder(f, x, fun)`**, where *f* is the factor, *x* is the variable according to which the reorder is happening, and *fun* is the function to determine the reordering, with the median being its default.
 
-Going back to our example:
+#### Let's see how it works. But first, let's create a plot:
 
 ```{r}
-#Create a plot
+#Plot
 df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
@@ -397,6 +451,12 @@ df %>%
   geom_point()
 
 ```
+---
+
+# Change the order of levels:  *fct_reorder()*
+
+#### Now, look what does **`fct_reorder()`** do: 
+
 ```{r}
 #Reorder plot!
 df_marriage <- df %>%
@@ -409,28 +469,30 @@ ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
 ```
 
 ---
-# Change the value of levels: fct_collapse()
+name: collapse
+
+# Change the value of levels:  *fct_collapse()*
 
 ## **`fct_collapse`**
 
 ### Description
 
-* **`forcats`** also allows to to collapse factors into other factors.
+* **`forcats`** also allows to collapse factors into other factors.
 
-* This is particularly useful when a factor has too many levels for an easy overview, especially if the level of granularity is too high.
+* This is particularly useful when a factor has too many levels, especially if the level of granularity is too high.
 
-*  **`fct_collapse`** Collapses levels into manually defined groups.
+*  **`fct_collapse`** collapses levels into manually defined groups.
 
-Let's take the INCOME variable from our GSS as an example:
+#### Consider the income variable from our GSS as an example:
 
 ```{r}
 df %>% ggplot(aes(x = INCOME)) +
     geom_bar()
 ```
 ---
-# Change the value of levels: fct_collapse()
+# Change the value of levels:  *fct_collapse()*
 
-* It makes more sense to recategorize the data according to income classes so we use **`fct_collapse`**:
+#### It makes more sense to recategorize the data according to income classes so we use **`fct_collapse`**:
 
 ```{r}
 df <- df %>%
@@ -444,8 +506,10 @@ df <- df %>%
 df %>% ggplot(aes(x = income_brackets)) +
     geom_bar()
 ```
+---
+# Change the value of levels:  *fct_collapse()*
 
-* OR other groupings of data ranges:
+#### OR other groupings of data ranges:
 
 ```{r}
 df %>% ggplot(aes(x = RELIG)) +
@@ -459,9 +523,9 @@ df %>%
 ```
 ---
 
-# Change the value of levels: fct_collapse()
+# Change the value of levels:  *fct_collapse()*
 
-* Lumping levels that appear below a minimum frequency together into a single factor
+#### Lumping levels that appear below a minimum frequency together into a single factor
 
 ```{r}
 df %>% ggplot(aes(x = RELIG)) +
@@ -483,18 +547,46 @@ name: summary
 
 ---
 
-# Summary
+# Summary `r emo::ji("document")`
 
 * Factors are R's data structure for categorical data.
 
-* Categorical date is a set or collection of categorical variables.
+* Categorical data is a set or collection of categorical variables.
 
-* Categorical variables assign units of observation to a particular group or nominal category.
+* Categorical variables assign units of observation (levels) to a particular category.
 
-* Factors could be easier to work with than characters.
+* Factors are R's data structure for categorical data.
+
+* Factors reorder character vectors in non alphabetical order and improve display.
+
+* They allow to inspect levels in a more detailed way.
 
 * The **`forcats`** package provides useful tools to solve problems with factors.
 
-* Most useful functions from the **`forcats`** package.
+---
+# Summary `r emo::ji("document")`
+
+### Summary of **`forcats`** functions.
+
+```{r, include=FALSE}
+tab1 <- matrix(c('factor()', 'as_factor', 'fct_relevel', 'fct_count', 'fct_unique', 'levels()', 'fct_reorder', 'fct_collapse'), ncol=1, byrow=TRUE)
+colnames(tab1) <- c('Function')
+rownames(tab1) <- c('1','2','3','4','5','6','7','8')
+tab1 <- as.table(tab1)
 
 
+tab2 <- matrix(c('Creates an ordered factor with assigned levels', 'Converts an input to a factor', 'Reorders de the levels of a factor', 'Counts entries in a factor', 'Removes duplicates', 'Returns the levels of a factor', 'Reorders a factor based on the value of another variable', 'Collapses levels into defined groups'), ncol=1, byrow=TRUE)
+colnames(tab2) <- c('Description')
+rownames(tab2) <- c('','','','','','','','')
+tab2 <- as.table(tab2)
+
+tab_factors <- cbind(tab1,tab2)
+
+factors_output <- knitr::kable(tab_factors) %>%
+kableExtra::kable_styling(bootstrap_options = "striped", font_size = 20)
+
+```
+
+```{r}
+factors_output
+```
