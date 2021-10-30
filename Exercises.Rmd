@@ -22,6 +22,8 @@ knitr::opts_chunk$set(echo = TRUE,
 #Packages
 library(forcats)
 library(tidyverse)
+library(emojifont)
+
 ds <- gss_cat
 
 ```
@@ -83,41 +85,51 @@ Additionally, check all the levels that are stored in a factor (not all factors 
 
 ## The GSS database and **`forcats`** `r emo::ji("cat")`
 
-The forcats package already has a built-in dataset from the *General Social Survey* that can be called with `gss_cat`. This dataset was crafted specifically for the purpose of getting to know the forcats package, and contains categorical variables already transformed into factors. Let's load the dataset and practice the other functions from the package. #levels(df$INCOME)
+The forcats package already has a built-in dataset from the *General Social Survey* that can be called with `gss_cat`. This dataset was crafted specifically for the purpose of getting to know the `forcats package`, and contains categorical variables already transformed into factors. Let's load the dataset and practice the other functions from the package. 
 
-a) First, let's take a look at the factors already present in the dataset (six out of the nine columns are factors). Using the `levels()` function, we can take a look at the levels in each factor. From the six variables, are there any that are perhaps too detailed and could be collapsed into smaller groups?
+First, let's take a look at the factors already present in the dataset (six out of the nine columns are factors). 
 
-```{r}
-
-```
-
-b) The partyid variable might be a little too detailed for visualization purposes. Let's collapse the levels in this factor into more aggregated groups: Democrats, Independents, Republicans, and Other using the `fct_collapse()` function. To preserve the original categorization, create a new variable in the dataset and assign it the new factor.
+* Using the `levels()` function, we can take a look at the levels in each factor. From the six variables, are there any that are perhaps too detailed and could be collapsed into smaller groups?
 
 ```{r}
-
+# WRITE YOUR CODE HERE
 ```
 
-c) The denom variable lists the denominations of Protestant respondents. However, there are again too many different levels for it to be easily visually interpretable. Using `fct_lump()`, try creating a new dataset containing only those respondents that are Protestant, leaving only the top 5 denominations - the remainder will be lumped into "Other". `fct_lump()` takes two arguments: the first is your factor, the second is `n = ` followed by the number of top categories you want to remain.
+The *partyid* variable might be a little too detailed for visualization purposes. Let's collapse the levels in this factor into more aggregated groups: Democrats, Independents, Republicans, and Other using the `fct_collapse()` function. 
+
+ * To preserve the original categorization, create a new variable in the dataset and assign it the new factor.
 
 ```{r}
-
+# WRITE YOUR CODE HERE
 ```
 
+The *denom* variable lists the denominations of Protestant respondents. However, there are again too many different levels for it to be easily and visually interpretable. 
 
-d)i) Using the above dataset listing the denominations, let us try to see which of the denominations watches tv the most, on average, and plot it in a bar graph. 
+* Using `fct_lump()`, try creating a new dataset containing only those respondents that are Protestant, leaving only the top 5 denominations - the remainder will be lumped into "Other". `fct_lump()` takes two arguments: the first is your factor, the second is `n = ` followed by the number of top categories you want to remain.
 
 ```{r}
-
+# WRITE YOUR CODE HERE
 ```
 
-ii) The plot, while accurate, doesn't order the levels of the factor in a visually appealing way. Forcats to the rescue! We can order the factors according to their relationship with another variable using `fct_reorder()`, which takes two arguments: the factor we want reordered, and the variable according to which we want it reordered.
+
+Using the above dataset listing the denominations, try to see which of the denominations watches tv the most, on average, and plot it in a bar graph. 
 
 ```{r}
-
+# WRITE YOUR CODE HERE
 ```
 
-And that's that!
+The plot, while accurate, doesn't order the levels of the factor in a visually appealing way. `forcats` to the rescue! 
 
-Forcats let's us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles! 
+* Order the factors according to their relationship with another variable using `fct_reorder()`. Remember that this function takes two arguments: the factor we want reordered, and the variable according to which we want it reordered.
 
-These exercises showed the basics, but in case of any doubt (or if you want to learn more), please consult the cheatsheet found here by blah blah.
+```{r}
+# WRITE YOUR CODE HERE
+```
+
+And that's all for this workshop! `r emo::ji("sad")`
+
+## Reminder `r emo::ji("watch")`
+
+*`forcats` let's us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles! 
+
+* These exercises showed the basics, but in case of any doubt (or if you want to learn more), please consult the cheatsheet found here by blah blah.
