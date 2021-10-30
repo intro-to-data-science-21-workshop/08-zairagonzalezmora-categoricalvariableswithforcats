@@ -83,7 +83,7 @@ Additionally, check all the levels that are stored in a factor (not all factors 
 
 ## The GSS database and **`forcats`** `r emo::ji("cat")`
 
-2) The forcats package already has a built-in dataset from the General Social Survey that can be called with `gss_cat`. This dataset was crafted specifically for the purpose of getting to know the forcats package, and contains categorical variables already transformed into factors. Let's load the dataset and practice the other functions from the package. #levels(df$INCOME)
+The forcats package already has a built-in dataset from the *General Social Survey* that can be called with `gss_cat`. This dataset was crafted specifically for the purpose of getting to know the forcats package, and contains categorical variables already transformed into factors. Let's load the dataset and practice the other functions from the package. #levels(df$INCOME)
 
 a) First, let's take a look at the factors already present in the dataset (six out of the nine columns are factors). Using the `levels()` function, we can take a look at the levels in each factor. From the six variables, are there any that are perhaps too detailed and could be collapsed into smaller groups?
 
