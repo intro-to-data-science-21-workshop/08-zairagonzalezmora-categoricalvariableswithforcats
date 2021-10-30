@@ -528,14 +528,21 @@ df %>%
 #### Lumping levels that appear below a minimum frequency together into a single factor
 
 ```{r}
-df %>% ggplot(aes(x = RELIG)) +
-    geom_bar()
+df_relig <- df %>% 
+  ggplot(aes(x = RELIG)) +
+  geom_bar()
 
-df %>%
+df_relig_new <- df %>%
   mutate(religion = fct_lump(RELIG, n = 4)) %>%
   group_by(religion) %>%
   ggplot(aes(x = religion)) +
   geom_bar()
+
+pdf("relig1.pdf")
+print(df_relig)
+dev.off()
+
+knitr::include_graphics("./relig1.pdf")
 ```
 ---
 class: inverse, center, middle
