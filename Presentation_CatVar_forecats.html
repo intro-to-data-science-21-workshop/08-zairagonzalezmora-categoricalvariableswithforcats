@@ -68,7 +68,7 @@ name: introduction
 
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
-####  - How many times have you struggle when finding **categorical data** in your datasets? 😿
+####  - How many times have you struggle when finding **categorical data** in your datasets? 🙍
 
 &lt;br&gt;
 &lt;div align="center"&gt;
@@ -141,7 +141,7 @@ name: categoricaldata
 
 * They are often stored with different values in a dataset and we need to differentiate category numbers and category labels. 
 
-* We need consistency to work with them properly. 😒
+* We need consistency to work with them properly. 😐
 
 * Thus, we need to know their *true value* not to miss important information. 
 
@@ -159,7 +159,7 @@ name: factors
 
 ---
 
-# Factors 🔡
+# Factors 🔠
 
 ### What are factors?
 
@@ -222,7 +222,7 @@ name: functions
 ---
 name: factor
 
-# Create a new factor: *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor*
 
 ## **`factor()`**
 
@@ -244,7 +244,7 @@ name: factor
 
 ---
 
-# Create a new factor: *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor*
 
 #### Let's start from zero to show you how it works:
 &lt;br&gt;
@@ -270,7 +270,7 @@ R&gt; eu_countries
 ```
 
 ---
-# Create a new factor: *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor*
 
 #### With base R **`as.factor`** our output would be the following:
 &lt;br&gt;
@@ -292,7 +292,7 @@ R&gt; eu_countries_fct
 ```
 
 ---
-# Create a new factor: *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor*
 
 #### But... what if we want to see countries ordered by their year of accession to the EU?
 
@@ -312,20 +312,20 @@ R&gt; factor(country_sample, levels = members)
 ```
 
 ```
-##  [1] Malta       Denmark     Portugal    Sweden      Slovenia    Spain      
-##  [7] Portugal    Slovakia    Belgium     Italy       Greece      Spain      
-## [13] Belgium     Czechia     Slovenia    Germany     France      Croatia    
-## [19] Belgium     Croatia     Belgium     Slovakia    Lithuania   Netherlands
-## [25] France      Lithuania   Poland      Germany     Estonia     Ireland    
-## [31] Czechia     Latvia      Luxembourg  Austria     Slovenia    Latvia     
-## [37] Portugal    Croatia     Estonia     Slovakia   
+##  [1] Denmark     France      Croatia     Estonia     Ireland     Germany    
+##  [7] Cyprus      France      Bulgaria    Lithuania   Czechia     Latvia     
+## [13] France      Hungary     Hungary     Bulgaria    France      Netherlands
+## [19] Lithuania   Hungary     Lithuania   Estonia     Cyprus      Croatia    
+## [25] Lithuania   Sweden      Malta       Greece      Lithuania   Romania    
+## [31] Italy       Cyprus      Estonia     Cyprus      Latvia      Germany    
+## [37] Bulgaria    Germany     Slovenia    Lithuania  
 ## 27 Levels: Belgium France Germany Italy Luxembourg Netherlands ... Croatia
 ```
 
 ---
 name: relevel
 
-# Change levels of factors: *fct_relevel*
+# Change levels of factors:  *fct_relevel*
 
 
 ## **`fct_relevel()`**
@@ -349,7 +349,7 @@ name: relevel
 ---
 name: count
 
-#Inspect factors: *fct_count()*
+#Inspect factors:  *fct_count()*
 
 ## **`fct_count()`**
 
@@ -368,7 +368,7 @@ name: count
 * Before counting, it might be useful to remove duplicates. We can do this with **`fct_unique()`**. 
 
 ---
-#Inspect factors: *fct_count()*
+#Inspect factors:  *fct_count()*
 
 #### Following our example:
 
@@ -380,53 +380,33 @@ R&gt; fct_count(country_sample, head(12))
 ```
 
 ```
-## # A tibble: 22 x 2
-##    f            n
-##    &lt;fct&gt;    &lt;int&gt;
-##  1 Belgium      4
-##  2 Croatia      3
-##  3 Portugal     3
-##  4 Slovakia     3
-##  5 Slovenia     3
-##  6 Czechia      2
-##  7 Estonia      2
-##  8 France       2
-##  9 Germany      2
-## 10 Latvia       2
-## # ... with 12 more rows
-```
----
-#Inspect factors: *fct_count()*
-
-#### See what happens when sorting:
-
-
-```r
-R&gt; #Count the times the name of a country is repeated
-R&gt; 
-R&gt; fct_count(country_sample, sort = TRUE, head(12))
-```
-
-```
-## # A tibble: 22 x 3
-##    f            n     p
-##    &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
-##  1 Belgium      4 0.1  
-##  2 Croatia      3 0.075
-##  3 Portugal     3 0.075
-##  4 Slovakia     3 0.075
-##  5 Slovenia     3 0.075
-##  6 Czechia      2 0.05 
-##  7 Estonia      2 0.05 
-##  8 France       2 0.05 
-##  9 Germany      2 0.05 
-## 10 Latvia       2 0.05 
-## # ... with 12 more rows
+## # A tibble: 19 x 2
+##    f               n
+##    &lt;fct&gt;       &lt;int&gt;
+##  1 Lithuania       6
+##  2 Cyprus          4
+##  3 France          4
+##  4 Bulgaria        3
+##  5 Estonia         3
+##  6 Germany         3
+##  7 Hungary         3
+##  8 Croatia         2
+##  9 Latvia          2
+## 10 Czechia         1
+## 11 Denmark         1
+## 12 Greece          1
+## 13 Ireland         1
+## 14 Italy           1
+## 15 Malta           1
+## 16 Netherlands     1
+## 17 Romania         1
+## 18 Slovenia        1
+## 19 Sweden          1
 ```
 ---
 name: levels
 
-# Inspect factors: *levels()*
+# Inspect factors:  *levels()*
 
 ## **`levels()`**
 
@@ -447,7 +427,7 @@ For this part, we are going to use the **General Social Survey (GSS)** dataset, 
 * You can find it here: https://gss.norc.org/get-the-data
 
 ---
-# Inspect factors: *levels()*
+# Inspect factors:  *levels()*
 
 
 
@@ -483,7 +463,7 @@ R&gt; levels(df$RELIG)
 ---
 name: reorder
 
-# Change the order of levels: *fct_reorder()*
+# Change the order of levels:  *fct_reorder()*
 
 ## **`fct_reorder()`**
 
@@ -493,44 +473,49 @@ name: reorder
 
 * The argument to use this function is **`fct_reorder(f, x, fun)`**, where *f* is the factor, *x* is the variable according to which the reorder is happening, and *fun* is the function to determine the reordering, with the median being its default.
 
-#### Let's see how it works. But first, let's create a plot:
+---
+# Change the order of levels:  *fct_reorder()*
+
+#### Let's see how it works.
 
 
-```r
-R&gt; #Plot
-R&gt; df %&gt;%
-+   na.omit(MARITAL) %&gt;%
-+   group_by(MARITAL) %&gt;%
-+   summarize(age = mean(as.numeric(AGE), na.rm = T)) %&gt;%
-+   ggplot(aes(age, MARITAL)) +
-+   geom_point()
+```
+## png 
+##   2
 ```
 
-&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="./marital.png" style="display: block; margin: auto;" /&gt;
 ---
 
-# Change the order of levels: *fct_reorder()*
+# Change the order of levels:  *fct_reorder()*
 
 #### Now, look what does **`fct_reorder()`** do: 
-
+.pull-left[
 
 ```r
 R&gt; #Reorder plot!
 R&gt; df_marriage &lt;- df %&gt;%
 +   na.omit(MARITAL) %&gt;%
 +   group_by(MARITAL) %&gt;%
-+   summarize(age = mean(as.numeric(AGE), na.rm = T))
-R&gt;   
-R&gt; ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
++   summarize(age = mean(as.numeric(AGE), na.rm = T)) %&gt;%
++   ggplot(aes(age, fct_reorder(MARITAL, age))) +
 +   geom_point()
 ```
+]
 
-&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+.pull-right[
 
+```
+## png 
+##   2
+```
+
+&lt;img src="./marriage.png" style="display: block; margin: auto;" /&gt;
+]
 ---
 name: collapse
 
-# Change the value of levels: *fct_collapse()*
+# Change the value of levels:  *fct_collapse()*
 
 ## **`fct_collapse`**
 
@@ -546,13 +531,14 @@ name: collapse
 
 
 ```r
-R&gt; df %&gt;% ggplot(aes(x = INCOME)) +
-+     geom_bar()
+R&gt; df %&gt;% 
++   ggplot(aes(x = INCOME)) +
++   theme(axis.text.x = element_text(angle = 90))
 ```
 
 &lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 ---
-# Change the value of levels: *fct_collapse()*
+# Change the value of levels:  *fct_collapse()*
 
 #### It makes more sense to recategorize the data according to income classes so we use **`fct_collapse`**:
 
@@ -572,50 +558,21 @@ R&gt; df %&gt;% ggplot(aes(x = income_brackets)) +
 
 &lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 ---
-# Change the value of levels: *fct_collapse()*
+# Change the value of levels:  *fct_collapse()*
 
 #### OR other groupings of data ranges:
 
 
-```r
-R&gt; df %&gt;% ggplot(aes(x = RELIG)) +
-+     geom_bar()
-```
 
-&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="./relig1.png" style="display: block; margin: auto;" /&gt;
 
-```r
-R&gt; df %&gt;%
-+   mutate(religion = fct_lump(RELIG, n = 4)) %&gt;%
-+   group_by(religion) %&gt;%
-+   ggplot(aes(x = religion)) +
-+   geom_bar()
-```
-
-&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-13-2.png" style="display: block; margin: auto;" /&gt;
 ---
 
-# Change the value of levels: *fct_collapse()*
+# Change the value of levels:  *fct_collapse()*
 
 #### Lumping levels that appear below a minimum frequency together into a single factor
 
-
-```r
-R&gt; df %&gt;% ggplot(aes(x = RELIG)) +
-+     geom_bar()
-```
-
-&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
-
-```r
-R&gt; df %&gt;%
-+   mutate(religion = fct_lump(RELIG, n = 4)) %&gt;%
-+   group_by(religion) %&gt;%
-+   ggplot(aes(x = religion)) +
-+   geom_bar()
-```
-
-&lt;img src="Presentation_CatVar_forecats_files/figure-html/unnamed-chunk-14-2.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="./relig2.png" style="display: block; margin: auto;" /&gt;
 ---
 class: inverse, center, middle
 name: summary
@@ -643,16 +600,11 @@ name: summary
 * The **`forcats`** package provides useful tools to solve problems with factors.
 
 ---
-# Summary 📄
+# Summary 📜
 
 ### Summary of **`forcats`** functions.
 
 
-
-
-```r
-R&gt; factors_output
-```
 
 &lt;table class="table table-striped" style="font-size: 20px; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;

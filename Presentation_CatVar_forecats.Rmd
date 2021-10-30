@@ -428,16 +428,24 @@ name: reorder
 
 * The argument to use this function is **`fct_reorder(f, x, fun)`**, where *f* is the factor, *x* is the variable according to which the reorder is happening, and *fun* is the function to determine the reordering, with the median being its default.
 
+---
+# Change the order of levels:  *fct_reorder()*
+
 #### Let's see how it works.
 
-```{r}
-#Plot
-df %>%
+```{r, echo=FALSE}
+df_marital <- df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
   summarize(age = mean(as.numeric(AGE), na.rm = T)) %>%
   ggplot(aes(age, MARITAL)) +
   geom_point()
+
+png("marital.png")
+print(df_marital)
+dev.off()
+
+knitr::include_graphics("./marital.png")
 
 ```
 ---
@@ -445,18 +453,27 @@ df %>%
 # Change the order of levels:  *fct_reorder()*
 
 #### Now, look what does **`fct_reorder()`** do: 
-
+.pull-left[
 ```{r}
 #Reorder plot!
 df_marriage <- df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
-  summarize(age = mean(as.numeric(AGE), na.rm = T))
-  
-ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
+  summarize(age = mean(as.numeric(AGE), na.rm = T)) %>%
+  ggplot(aes(age, fct_reorder(MARITAL, age))) +
   geom_point()
 ```
+]
 
+.pull-right[
+```{r, echo=FALSE}
+png("marriage.png")
+print(df_marriage)
+dev.off()
+
+knitr::include_graphics("./marriage.png")
+```
+]
 ---
 name: collapse
 

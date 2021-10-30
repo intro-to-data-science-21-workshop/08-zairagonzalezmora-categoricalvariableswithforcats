@@ -27,15 +27,15 @@ ds <- gss_cat
 ```
 ---
 
-## Exercises with `forcats` functions
+## Exercises with `forcats` functions `r emo::ji("nerd")`
 
-Now that we've gone through the `forcats` basics, let's put this to practice! `r emo::ji("nerd")`
+Now that we've gone through the `forcats` basics, let's put this to practice!
 
-##### 1) Create a factor
+### Create a factor
 
 First, let's try to make a factor out of the days of the week. 
 
-As you can see from the base R `as.factor()` function below, the factor may have been created, but the levels within it are listed alphabetically. This is not particularly useful if you want to have the days of the week in order.
+As you can see from the base R `as.factor()` function showed below, the factor may have been created, but the levels within it are listed alphabetically. This is not particularly useful if you want to have the days of the week in order.
 
 ```{r}
 day_of_week <- c("Monday", "Tuesday", "Wednesday", "Thursday", 
@@ -45,7 +45,7 @@ day_of_week_fct <- as.factor(day_of_week)
 
 day_of_week_fct
 ```
-Now, let's see what happens if we use the `factor()` function instead. Remember the argument `factor(f, levels = x)` function. 
+Instead, we can use the `factor()` function. Remember the argument `factor(f, levels = x)`. 
 
 * The function takes two arguments: the factor itself, typically a column in your dataset; and a list containing the levels of that factor.
 
