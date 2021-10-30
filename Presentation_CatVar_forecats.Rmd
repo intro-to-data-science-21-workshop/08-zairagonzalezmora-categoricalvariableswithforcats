@@ -433,7 +433,7 @@ name: reorder
 
 #### Let's see how it works.
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 df_marital <- df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
@@ -466,7 +466,7 @@ df_marriage <- df %>%
 ]
 
 .pull-right[
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 png("marriage.png")
 print(df_marriage)
 dev.off()

@@ -68,7 +68,7 @@ name: introduction
 
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
-####  - How many times have you struggle when finding **categorical data** in your datasets? 😢
+####  - How many times have you struggle when finding **categorical data** in your datasets? 😭
 
 &lt;br&gt;
 &lt;div align="center"&gt;
@@ -108,7 +108,7 @@ name: categoricaldata
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
 
 ---
-# Categorical Data 📈
+# Categorical Data 💹
 
 ### What is categorical data?
 
@@ -135,7 +135,7 @@ name: categoricaldata
 
 ---
 
-# Categorical Data 📈
+# Categorical Data 💹
 
 ### Why can categorical variables be problematic?
 
@@ -159,7 +159,7 @@ name: factors
 
 ---
 
-# Factors 🔠
+# Factors 🔡
 
 ### What are factors?
 
@@ -312,13 +312,13 @@ R&gt; factor(country_sample, levels = members)
 ```
 
 ```
-##  [1] Denmark     Greece      Estonia     Ireland     Poland      Denmark    
-##  [7] Malta       Sweden      Hungary     Germany     Czechia     Belgium    
-## [13] Luxembourg  Czechia     Italy       Greece      Czechia     Finland    
-## [19] Portugal    Estonia     Bulgaria    Italy       Denmark     Croatia    
-## [25] France      Malta       Latvia      Finland     Netherlands Finland    
-## [31] Austria     Bulgaria    Cyprus      Estonia     Austria     Denmark    
-## [37] Austria     Portugal    Belgium     Netherlands
+##  [1] Denmark     Austria     Lithuania   Cyprus      Czechia     Italy      
+##  [7] Belgium     Romania     Luxembourg  Austria     Luxembourg  Netherlands
+## [13] France      Denmark     Ireland     Lithuania   Cyprus      Sweden     
+## [19] Slovenia    Netherlands Bulgaria    Germany     Luxembourg  Slovakia   
+## [25] Bulgaria    Spain       France      Austria     Croatia     Denmark    
+## [31] Estonia     France      Poland      Slovakia    Netherlands Bulgaria   
+## [37] Denmark     Estonia     Denmark     Slovakia   
 ## 27 Levels: Belgium France Germany Italy Luxembourg Netherlands ... Croatia
 ```
 
@@ -380,20 +380,20 @@ R&gt; fct_count(country_sample, head(12))
 ```
 
 ```
-## # A tibble: 22 x 2
-##    f            n
-##    &lt;fct&gt;    &lt;int&gt;
-##  1 Denmark      4
-##  2 Austria      3
-##  3 Czechia      3
-##  4 Estonia      3
-##  5 Finland      3
-##  6 Belgium      2
-##  7 Bulgaria     2
-##  8 Greece       2
-##  9 Italy        2
-## 10 Malta        2
-## # ... with 12 more rows
+## # A tibble: 21 x 2
+##    f               n
+##    &lt;fct&gt;       &lt;int&gt;
+##  1 Denmark         5
+##  2 Austria         3
+##  3 Bulgaria        3
+##  4 France          3
+##  5 Luxembourg      3
+##  6 Netherlands     3
+##  7 Slovakia        3
+##  8 Cyprus          2
+##  9 Estonia         2
+## 10 Lithuania       2
+## # ... with 11 more rows
 ```
 ---
 name: levels

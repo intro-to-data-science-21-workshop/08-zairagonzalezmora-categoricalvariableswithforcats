@@ -130,6 +130,6 @@ And that's all for this workshop! `r emo::ji("sad")`
 
 ## Reminder `r emo::ji("watch")`
 
-*`forcats` let's us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles! 
+* `forcats` let's us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles!
 
 * These exercises showed the basics, but in case of any doubt (or if you want to learn more), please consult the cheatsheet found here by blah blah.
