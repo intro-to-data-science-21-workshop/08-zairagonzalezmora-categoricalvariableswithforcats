@@ -358,9 +358,9 @@ div.tocify {
 </div>
 <div id="change-order-of-levels" class="section level3">
 <h3>2) Change order of levels</h3>
-<p>Now you are magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the <code>fct_relevel(f, )</code> function to reorganize the levels.</p>
+<p>Now you are magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the <code>fct_relevel(f, levels = x)</code> function to reorganize the levels.</p>
 <ul>
-<li>The function takes two arguments: 1) the factor you want <em>releveled</em> and 2) a list containing the newly ordered levels. (Hint: it’s pretty much identical to creating a factor, except that you can only perform this on an existing factor as the first argument)</li>
+<li>The function takes two arguments: the factor you want <em>releveled</em> and a list containing the newly ordered levels. (Hint: it’s pretty much identical to creating a factor, except that you can only perform this on an existing factor as the first argument)</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
 <p>Note that there are plenty of other functions used to reorder factors:</p>
@@ -372,11 +372,6 @@ div.tocify {
 <li><code>fct_shuffle()</code> randomizes the levels of a factor.</li>
 </ul>
 </div>
-<div id="inspect-levels" class="section level3">
-<h3>3) Inspect levels</h3>
-<p>Additionally, check all the levels that are stored in a factor (not all factors might appear in a sample) using the <code>levels()</code> function.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
-</div>
 </div>
 <div id="the-gss-database-and-forcats" class="section level2">
 <h2>The GSS database and <strong><code>forcats</code></strong> 🐱</h2>
@@ -385,24 +380,24 @@ div.tocify {
 <ul>
 <li>Using the <code>levels()</code> function, we can take a look at the levels in each factor. From the six variables, are there any that are perhaps too detailed and could be collapsed into smaller groups?</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
 <p>The <em>partyid</em> variable might be a little too detailed for visualization purposes. Let’s collapse the levels in this factor into more aggregated groups: Democrats, Independents, Republicans, and Other using the <code>fct_collapse()</code> function.</p>
 <ul>
 <li>To preserve the original categorization, create a new variable in the dataset and assign it the new factor.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
 <p>The <em>denom</em> variable lists the denominations of Protestant respondents. However, there are again too many different levels for it to be easily and visually interpretable.</p>
 <ul>
 <li>Using <code>fct_lump()</code>, try creating a new dataset containing only those respondents that are Protestant, leaving only the top 5 denominations - the remainder will be lumped into “Other”. <code>fct_lump()</code> takes two arguments: the first is your factor, the second is <code>n =</code> followed by the number of top categories you want to remain.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
 <p>Using the above dataset listing the denominations, try to see which of the denominations watches tv the most, on average, and plot it in a bar graph.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
 <p>The plot, while accurate, doesn’t order the levels of the factor in a visually appealing way. <code>forcats</code> to the rescue!</p>
 <ul>
 <li>Order the factors according to their relationship with another variable using <code>fct_reorder()</code>. Remember that this function takes two arguments: the factor we want reordered, and the variable according to which we want it reordered.</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
 <p>And that’s all for this workshop! 😢</p>
 </div>
 <div id="reminder" class="section level2">

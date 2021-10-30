@@ -50,13 +50,12 @@ class: inverse, center, middle
 
       * [`factor()`](#factor)
       * [`as_factor()`](#factor)
-      * [`fct_relevel`](#relevel)
-      * [`fct_count`](#count)
-      * [`fct_unique`](#unique)
+      * [`fct_relevel()`](#relevel)
+      * [`fct_count()`](#count)
       * [`levels()`](#levels)
-      * [`fct_reorder`](#reorder)
-      * [`fct_collapse`](#collapse)
-      * [`fct_lump`](#lump)
+      * [`fct_reorder()`](#reorder)
+      * [`fct_collapse()`](#collapse)
+      * [`fct_lump()`](#lump)
  
 6. [Summary](#summary)
  ]
@@ -69,7 +68,7 @@ name: introduction
 
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
-####  - How many times have you struggle when finding **categorical data** in your datasets? 😿
+####  - How many times have you struggled when finding **categorical data** in your datasets? 😭
 
 &lt;br&gt;
 &lt;div align="center"&gt;
@@ -80,7 +79,7 @@ By now, we already know that **data cleaning** is important. We have realized th
 
 * In this workshop we will to show you how to work with **categorical data** using the **`forcats`** tool. 
 
-* It will help you to work with **factors**. But more about about in a minute.
+* It will help you to work with **factors**. But more about about that in a minute.
 
 ---
 
@@ -109,7 +108,7 @@ name: categoricaldata
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/&gt;&lt;/html&gt;
 
 ---
-# Categorical Data 💹
+# Categorical Data 📈
 
 ### What is categorical data?
 
@@ -121,10 +120,6 @@ name: categoricaldata
 * Categorical variables are those that have a fixed and known set of possible values.
 
 * They assign each unit of observation to a particular group or nominal category.
-
-* They represent types of data that may be divided into groups.
-
-* Examples of categorical variables: age, group, gender, educational level, income brackets.
 
 * Categorical variables can be used to represent different types of qualitative data.
 
@@ -142,7 +137,7 @@ name: categoricaldata
 
 * They are often stored with different values in a dataset and we need to differentiate category numbers and category labels. 
 
-* We need consistency to work with them properly. 😐
+* We need consistency to work with them properly. 😒
 
 * Thus, we need to know their *true value* not to miss important information. 
 
@@ -160,25 +155,25 @@ name: factors
 
 ---
 
-# Factors 🔠
+# Factors 🔤
 
 ### What are factors?
 
 * Factors are R's data structure for categorical data: **R represents categorical data with factors**.
 
-* A **factor** is an integer vector with **levels attribute** that stores a set of mappings between integers and categorical values. [level: all possible 'categories' of a factor] 
+* A **factor** is an integer vector with a **levels attribute** that stores a set of mappings between integers and categorical values. [level: all possible 'categories' of a factor] 
 
 * R displays not the integers from a variable, but the levels associated with them.
 
 ### Why are factors useful?
 
-* Factors in the R language allow to treat character variables in a different way.
+* Factors in the R language allow you to treat character variables in a different way.
 
 * Factors could be easier to work with than characters.
 
-* Factors are helpful for reordering character vectors in non alphabetical order and to improve display.
+* Factors are helpful for reordering character vectors in a non alphabetical order and to improve display.
 
-* They allow to inspect levels in a more detailed way.
+* They allow you to inspect levels in a more detailed way.
 
 * Working with factors is a nicer alternative that working only with dummies.
 
@@ -223,29 +218,29 @@ name: functions
 ---
 name: factor
 
-# Create a new factor:  *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor()*
 
 ## **`factor()`**
 
 ### Description
 
-* Base R has its own function to create factors, **`as.factor()`**, which basically encodes a vector as factor. However, this function lists the levels of the factors in alphabetical order, whereas we might need to order levels in a different way. 
+* Base R has its own function to create factors, **`as.factor()`**, which basically encodes a vector as a factor. However, this function lists the levels of the factors in alphabetical order, whereas we might need to order levels in a different way. 
 
 * Instead of using base R, we can use the **`factor()`** function from **`forcats`**.
 
 * **`factor()`** will create an ordered factor with assigned levels.
 
-## **`as_factor`**
+## **`as_factor()`**
 
-* You can also convert an input to a factor with **`as_factor`**.
+* You can also convert an input to a factor with **`as_factor()`**.
 
-* When x is a character, **`as_factor`** creates levels in the order in which they appear.
+* When x is a character, **`as_factor()`** creates levels in the order in which they appear.
 
 * When x is numeric, the ordering is based on the numeric value.
 
 ---
 
-# Create a new factor:  *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor()*
 
 #### Let's start from zero to show you how it works:
 &lt;br&gt;
@@ -271,9 +266,9 @@ R&gt; eu_countries
 ```
 
 ---
-# Create a new factor:  *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor()*
 
-#### With base R **`as.factor`** our output would be the following:
+#### With the base R **`as.factor()`** function our output would be the following:
 &lt;br&gt;
 
 
@@ -293,7 +288,7 @@ R&gt; eu_countries_fct
 ```
 
 ---
-# Create a new factor:  *factor()*, *as_factor*
+# Create a new factor:  *factor()*, *as_factor()*
 
 #### But... what if we want to see countries ordered by their year of accession to the EU?
 
@@ -313,20 +308,20 @@ R&gt; factor(country_sample, levels = members)
 ```
 
 ```
-##  [1] Lithuania   Finland     Estonia     Croatia     Lithuania   Austria    
-##  [7] Slovenia    Netherlands Slovenia    Romania     Cyprus      Greece     
-## [13] Bulgaria    Luxembourg  Hungary     Poland      Malta       Latvia     
-## [19] Germany     Spain       Portugal    Hungary     Poland      Latvia     
-## [25] Poland      Slovenia    Ireland     Belgium     Luxembourg  Latvia     
-## [31] Hungary     Lithuania   Poland      Estonia     Greece      Greece     
-## [37] Slovakia    Slovenia    Netherlands Portugal   
+##  [1] Luxembourg  Finland     Denmark     Malta       Sweden      Luxembourg 
+##  [7] Estonia     Portugal    Austria     Croatia     Germany     Ireland    
+## [13] Cyprus      Cyprus      Ireland     Lithuania   Lithuania   Belgium    
+## [19] Czechia     Belgium     Denmark     Croatia     Slovenia    Italy      
+## [25] Denmark     France      Spain       Finland     Denmark     Austria    
+## [31] Germany     Sweden      Belgium     Netherlands Portugal    Hungary    
+## [37] Italy       Portugal    Cyprus      Lithuania  
 ## 27 Levels: Belgium France Germany Italy Luxembourg Netherlands ... Croatia
 ```
 
 ---
 name: relevel
 
-# Change levels of factors:  *fct_relevel*
+# Change levels of factors:  *fct_relevel()*
 
 
 ## **`fct_relevel()`**
@@ -341,11 +336,7 @@ name: relevel
 
 * If they're not, we need to determine the levels according our needs (maybe pencil, pen, brush?).
 
-* **`fct_relevel()`** is useful to change the order in which the levels of a factor appear. 
-
-* **`fct_relevel()`** reorders factor labels by hand.
-
-* If we think about it, we could have also used **`fct_relevel()`** to do what did with **`as_factor`**.
+* **`fct_relevel()`** is useful to manually change the order in which the levels of a factor will appear. 
 
 ---
 name: count
@@ -366,8 +357,6 @@ name: count
     
     * If *prop* is TRUE, the fraction of marginal table will be computed.
 
-* Before counting, it might be useful to remove duplicates. We can do this with **`fct_unique()`**. 
-
 ---
 #Inspect factors:  *fct_count()*
 
@@ -377,24 +366,26 @@ name: count
 ```r
 R&gt; #Count the times the name of a country is repeated
 R&gt; 
-R&gt; fct_count(country_sample, head(12))
+R&gt; fct_count(country_sample) %&gt;%
++   head(12)
 ```
 
 ```
-## # A tibble: 22 x 2
-##    f               n
-##    &lt;fct&gt;       &lt;int&gt;
-##  1 Poland          4
-##  2 Slovenia        4
-##  3 Greece          3
-##  4 Hungary         3
-##  5 Latvia          3
-##  6 Lithuania       3
-##  7 Estonia         2
-##  8 Luxembourg      2
-##  9 Netherlands     2
-## 10 Portugal        2
-## # ... with 12 more rows
+## # A tibble: 12 x 2
+##    f           n
+##    &lt;fct&gt;   &lt;int&gt;
+##  1 Austria     2
+##  2 Belgium     3
+##  3 Croatia     2
+##  4 Cyprus      3
+##  5 Czechia     1
+##  6 Denmark     4
+##  7 Estonia     1
+##  8 Finland     2
+##  9 France      1
+## 10 Germany     2
+## 11 Hungary     1
+## 12 Ireland     2
 ```
 ---
 name: levels
@@ -405,9 +396,9 @@ name: levels
 
 ### Description
 
-* **`levels()`** returns/set the levels of a factor: levels(f); levels(f) &lt;- c("x","y","z")
+* **`levels()`** returns/set the levels of a factor.
  
-* This function allows to check all the levels that are stored in a factor, as not all factors might appear in a sample. Before counting (**`fct_count()`**), for instance, we might want to check this.
+* This function allows to check all the levels that are stored in a factor, as not all factors might appear in a sample. Before counting with **`fct_count()`**, for instance, we might want to check this.
 
 For this part, we are going to use the **General Social Survey (GSS)** dataset, a product of the National Data Program for the social Sciences from the United States.
 
@@ -500,18 +491,19 @@ R&gt; df_marriage &lt;- df %&gt;%
 ---
 name: collapse
 
-# Change the value of levels:  *fct_collapse()*
-
-## **`fct_collapse`**
-
-### Description
+# Collapse levels:  *fct_collapse()*, *fct_lump()*
 
 * **`forcats`** also allows to collapse factors into other factors.
 
 * This is particularly useful when a factor has too many levels, especially if the level of granularity is too high.
 
-*  **`fct_collapse`** collapses levels into manually defined groups.
-*  **`fct_lump`** lumps levels that do not appear in the top n = number of times into "Other"
+## **`fct_collapse()`**
+
+*  This function collapses levels into manually defined groups.
+
+## **`fct_lump()`**
+
+*  This function lumps levels that do not appear in the top n = number of times into "Other"
 
 ---
 # Change the value of levels:  *fct_collapse()*
@@ -525,7 +517,7 @@ name: collapse
 ---
 # Change the value of levels:  *fct_collapse()*
 
-#### It makes more sense to recategorize the data according to income classes so we use **`fct_collapse`**:
+#### It makes more sense to recategorize the data according to income classes so we use **`fct_collapse()`**:
 .pull-left-wide[
 
 ```r
@@ -594,7 +586,7 @@ name: summary
 
 ---
 
-# Summary 📃
+# Summary 📝
 
 * Factors are R's data structure for categorical data.
 
@@ -611,7 +603,7 @@ name: summary
 * The **`forcats`** package provides useful tools to solve problems with factors.
 
 ---
-# Summary 📜
+# Summary 📝
 
 ### Summary of **`forcats`** functions.
 &lt;br&gt;

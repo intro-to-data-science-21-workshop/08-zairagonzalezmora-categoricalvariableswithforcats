@@ -59,9 +59,9 @@ week <- c(sample(day_of_week, 40, replace = T))
 ```
 ### 2) Change order of levels
 
-Now you are magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the `fct_relevel(f, )` function to reorganize the levels. 
+Now you are magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the `fct_relevel(f, levels = x)` function to reorganize the levels. 
 
-* The function takes two arguments: 1) the factor you want *releveled* and 2) a list containing the newly ordered levels. (Hint: it's pretty much identical to creating a factor, except that you can only perform this on an existing factor as the first argument)
+* The function takes two arguments: the factor you want *releveled* and a list containing the newly ordered levels. (Hint: it's pretty much identical to creating a factor, except that you can only perform this on an existing factor as the first argument)
 
 ```{r}
 # WRITE YOUR CODE HERE
@@ -75,13 +75,6 @@ Note that there are plenty of other functions used to reorder factors:
 - `fct_shift()` shifts the levels of a factor by one to each side.
 - `fct_shuffle()` randomizes the levels of a factor.
 
-### 3) Inspect levels
-
-Additionally, check all the levels that are stored in a factor (not all factors might appear in a sample) using the `levels()` function.
-
-```{r}
-# WRITE YOUR CODE HERE
-```
 
 ## The GSS database and **`forcats`** `r emo::ji("cat")`
 
