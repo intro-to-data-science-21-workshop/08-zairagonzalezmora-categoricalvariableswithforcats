@@ -333,12 +333,15 @@ div.tocify {
 
 <hr />
 <div id="exercises-with-forcats-functions" class="section level2">
-<h2>Exercises with <code>forcats</code> functions</h2>
-<p>Now that we’ve gone through the <code>forcats</code> basics, let’s put this to practice! 🤓</p>
+<h2>Exercises with <code>forcats</code> functions 🤓</h2>
+<p>Now that we’ve gone through the <code>forcats</code> basics, let’s put this to practice!</p>
 <div id="create-a-factor" class="section level3">
-<h3>Create a factor</h3>
+<h3>1) Create a factor</h3>
 <p>First, let’s try to make a factor out of the days of the week.</p>
-<p>As you can see from the base R <code>as.factor()</code> function below, the factor may have been created, but the levels within it are listed alphabetically. This is not particularly useful if you want to have the days of the week in order.</p>
+<ul>
+<li><p>As you can see below, the base R <code>as.factor()</code> function created a factor, but the levels within it are listed alphabetically.</p></li>
+<li><p>This is not particularly useful if you want to have the days of the week in order.</p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>day_of_week <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -347,16 +350,32 @@ div.tocify {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>day_of_week_fct</span></code></pre></div>
 <pre><code>## [1] Monday    Tuesday   Wednesday Thursday  Friday    Saturday  Sunday   
 ## Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
-<p>Now, let’s see what happens if we use the <code>factor()</code> function instead. Remember the argument <code>factor(f, levels = x)</code> function.</p>
+<p>Instead, we can use the <code>factor()</code> function. Remember the argument <code>factor(f, levels = x)</code>.</p>
 <ul>
 <li>The function takes two arguments: the factor itself, typically a column in your dataset; and a list containing the levels of that factor.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>week <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sample</span>(day_of_week, <span class="dv">40</span>, <span class="at">replace =</span> T))</span></code></pre></div>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Now you’re magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the <code>fct_relevel(f, )</code> function to reorganize the levels. The function takes two arguments: the factor you want releveled, and a list containing the newly ordered levels. (Hint: it’s pretty much identical to creating a factor, except you can only perform this on an existing factor as the first argument)</li>
-</ol>
-<p>Likewise, if we want to check all the levels that are stored in a factor (as not all factors might appear in a sample) is <code>levels()</code>.</p>
-<p>There are plenty of other functions used to reorder factors: - <code>fct_rev()</code> reverses the order of the levels in the factor. - <code>fct_infreq()</code> orders the levels according to the frequency in which they appear. - <code>fct_inorder()</code> orders the levels in the order in which they appear. - <code>fct_shift()</code> shifts the levels of a factor by one to each side. - <code>fct_shuffle()</code> randomizes the levels of a factor.</p>
+</div>
+<div id="change-order-of-levels" class="section level3">
+<h3>2) Change order of levels</h3>
+<p>Now you are magically teleported to the Middle East, where Friday and Saturday are the weekend, and Sunday happens to be the first day of the week. Use the <code>fct_relevel(f, )</code> function to reorganize the levels.</p>
+<ul>
+<li>The function takes two arguments: 1) the factor you want <em>releveled</em> and 2) a list containing the newly ordered levels. (Hint: it’s pretty much identical to creating a factor, except that you can only perform this on an existing factor as the first argument)</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#WRITE YOUR CODE HERE</span></span></code></pre></div>
+<p>Note that there are plenty of other functions used to reorder factors:</p>
+<ul>
+<li><code>fct_rev()</code> reverses the order of the levels in the factor.</li>
+<li><code>fct_infreq()</code> orders the levels according to the frequency in which they appear.</li>
+<li><code>fct_inorder()</code> orders the levels in the order in which they appear.</li>
+<li><code>fct_shift()</code> shifts the levels of a factor by one to each side.</li>
+<li><code>fct_shuffle()</code> randomizes the levels of a factor.</li>
+</ul>
+</div>
+<div id="inspect-levels" class="section level3">
+<h3>3) Inspect levels</h3>
+<p>Additionally, check all the levels that are stored in a factor (not all factors might appear in a sample) using the <code>levels()</code> function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#WRITE YOUR CODE HERE</span></span></code></pre></div>
 </div>
 </div>
 <div id="the-gss-database-and-forcats" class="section level2">

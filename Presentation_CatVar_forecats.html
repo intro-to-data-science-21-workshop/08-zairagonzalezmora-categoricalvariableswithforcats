@@ -68,7 +68,7 @@ name: introduction
 
 By now, we already know that **data cleaning** is important. We have realized that treating certain variables is not always so straightforward, and we worry because we know that an inadequate treatment of variables can impact our analysis. 
 
-####  - How many times have you struggle when finding **categorical data** in your datasets? 🙍
+####  - How many times have you struggle when finding **categorical data** in your datasets? 😢
 
 &lt;br&gt;
 &lt;div align="center"&gt;
@@ -312,13 +312,13 @@ R&gt; factor(country_sample, levels = members)
 ```
 
 ```
-##  [1] Denmark     France      Croatia     Estonia     Ireland     Germany    
-##  [7] Cyprus      France      Bulgaria    Lithuania   Czechia     Latvia     
-## [13] France      Hungary     Hungary     Bulgaria    France      Netherlands
-## [19] Lithuania   Hungary     Lithuania   Estonia     Cyprus      Croatia    
-## [25] Lithuania   Sweden      Malta       Greece      Lithuania   Romania    
-## [31] Italy       Cyprus      Estonia     Cyprus      Latvia      Germany    
-## [37] Bulgaria    Germany     Slovenia    Lithuania  
+##  [1] Denmark     Greece      Estonia     Ireland     Poland      Denmark    
+##  [7] Malta       Sweden      Hungary     Germany     Czechia     Belgium    
+## [13] Luxembourg  Czechia     Italy       Greece      Czechia     Finland    
+## [19] Portugal    Estonia     Bulgaria    Italy       Denmark     Croatia    
+## [25] France      Malta       Latvia      Finland     Netherlands Finland    
+## [31] Austria     Bulgaria    Cyprus      Estonia     Austria     Denmark    
+## [37] Austria     Portugal    Belgium     Netherlands
 ## 27 Levels: Belgium France Germany Italy Luxembourg Netherlands ... Croatia
 ```
 
@@ -380,28 +380,20 @@ R&gt; fct_count(country_sample, head(12))
 ```
 
 ```
-## # A tibble: 19 x 2
-##    f               n
-##    &lt;fct&gt;       &lt;int&gt;
-##  1 Lithuania       6
-##  2 Cyprus          4
-##  3 France          4
-##  4 Bulgaria        3
-##  5 Estonia         3
-##  6 Germany         3
-##  7 Hungary         3
-##  8 Croatia         2
-##  9 Latvia          2
-## 10 Czechia         1
-## 11 Denmark         1
-## 12 Greece          1
-## 13 Ireland         1
-## 14 Italy           1
-## 15 Malta           1
-## 16 Netherlands     1
-## 17 Romania         1
-## 18 Slovenia        1
-## 19 Sweden          1
+## # A tibble: 22 x 2
+##    f            n
+##    &lt;fct&gt;    &lt;int&gt;
+##  1 Denmark      4
+##  2 Austria      3
+##  3 Czechia      3
+##  4 Estonia      3
+##  5 Finland      3
+##  6 Belgium      2
+##  7 Bulgaria     2
+##  8 Greece       2
+##  9 Italy        2
+## 10 Malta        2
+## # ... with 12 more rows
 ```
 ---
 name: levels
@@ -600,9 +592,11 @@ name: summary
 * The **`forcats`** package provides useful tools to solve problems with factors.
 
 ---
-# Summary 📜
+# Summary 📝
 
 ### Summary of **`forcats`** functions.
+
+&lt;br&gt;
 
 
 
