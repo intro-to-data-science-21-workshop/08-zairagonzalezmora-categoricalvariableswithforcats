@@ -384,12 +384,21 @@ For this part, we are going to use the **General Social Survey (GSS)** dataset, 
 ---
 # Inspect factors:  *levels()*
 
+## The GSS
+
 ```{r, include=FALSE}
 #Load dataset
 df <- read.spss("GSS2018.sav", use.value.label=TRUE, to.data.frame=TRUE) %>%
   select(INCOME, RELIG, NEWS, TVHOURS, AGE, MARITAL)
 
 ```
+
+```{r, echo=FALSE}
+df %>% head(10) %>% kbl()
+```
+
+---
+# Inspect factors:  *levels()*
 
 #### From our GSS data base, we want to see all the levels stored in the income factor: 
 
@@ -609,8 +618,6 @@ name: summary
 * Categorical data is a set or collection of categorical variables.
 
 * Categorical variables assign units of observation (levels) to a particular category.
-
-* Factors are R's data structure for categorical data.
 
 * Factors reorder character vectors in non alphabetical order and improve display.
 
