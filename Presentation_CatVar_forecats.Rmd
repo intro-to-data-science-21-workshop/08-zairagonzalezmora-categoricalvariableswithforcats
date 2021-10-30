@@ -368,17 +368,6 @@ fct_count(country_sample, head(12))
 
 ```
 ---
-#Inspect factors:  *fct_count()*
-
-#### See what happens when sorting:
-
-```{r}
-#Count the times the name of a country is repeated
-
-fct_count(country_sample, sort = TRUE, head(12))
-
-```
----
 name: levels
 
 # Inspect factors:  *levels()*
@@ -439,7 +428,7 @@ name: reorder
 
 * The argument to use this function is **`fct_reorder(f, x, fun)`**, where *f* is the factor, *x* is the variable according to which the reorder is happening, and *fun* is the function to determine the reordering, with the median being its default.
 
-#### Let's see how it works. But first, let's create a plot:
+#### Let's see how it works.
 
 ```{r}
 #Plot
@@ -486,8 +475,9 @@ name: collapse
 #### Consider the income variable from our GSS as an example:
 
 ```{r}
-df %>% ggplot(aes(x = INCOME)) +
-    geom_bar()
+df %>% 
+  ggplot(aes(x = INCOME)) +
+  theme(axis.text.x = element_text(angle = 90))
 ```
 ---
 # Change the value of levels:  *fct_collapse()*
@@ -511,31 +501,40 @@ df %>% ggplot(aes(x = income_brackets)) +
 
 #### OR other groupings of data ranges:
 
-```{r}
-df %>% ggplot(aes(x = RELIG)) +
-    geom_bar()
+```{r, include=FALSE}
+df_relig <- df %>% 
+  ggplot(aes(x = RELIG)) +
+  geom_bar()+
+  theme(axis.text.x = element_text(angle = 90))
 
-df %>%
+png("relig1.png")
+print(df_relig)
+dev.off()
+
+df_relig_new <- df %>%
   mutate(religion = fct_lump(RELIG, n = 4)) %>%
   group_by(religion) %>%
   ggplot(aes(x = religion)) +
-  geom_bar()
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90))
+
+png("relig2.png")
+print(df_relig_new)
+dev.off()
 ```
+
+```{r, echo=FALSE}
+knitr::include_graphics("./relig1.png")
+```
+
 ---
 
 # Change the value of levels:  *fct_collapse()*
 
 #### Lumping levels that appear below a minimum frequency together into a single factor
 
-```{r}
-df %>% ggplot(aes(x = RELIG)) +
-    geom_bar()
-
-df %>%
-  mutate(religion = fct_lump(RELIG, n = 4)) %>%
-  group_by(religion) %>%
-  ggplot(aes(x = religion)) +
-  geom_bar()
+```{r, echo=FALSE}
+knitr::include_graphics("./relig2.png")
 ```
 ---
 class: inverse, center, middle
@@ -587,6 +586,6 @@ kableExtra::kable_styling(bootstrap_options = "striped", font_size = 20)
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 factors_output
 ```
