@@ -653,3 +653,12 @@ kableExtra::kable_styling(bootstrap_options = "striped", font_size = 20)
 ```{r, echo=FALSE}
 factors_output
 ```
+---
+class: inverse, center, middle
+name:
+
+# Thank you! `r emo::ji("wave")`
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px style="width:1000px; margin:auto;"/></html>
+
+---
