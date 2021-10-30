@@ -466,7 +466,7 @@ df_marriage <- df %>%
 ]
 
 .pull-right[
-```{r, echo=FALSE, results = F}
+```{r, echo=FALSE, results= F}
 png("marriage.png")
 print(df_marriage)
 dev.off()
