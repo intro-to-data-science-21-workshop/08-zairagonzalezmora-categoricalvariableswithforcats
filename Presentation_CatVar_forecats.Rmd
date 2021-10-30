@@ -443,13 +443,18 @@ name: reorder
 
 ```{r}
 #Plot
-df %>%
+df_marital <- df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
   summarize(age = mean(as.numeric(AGE), na.rm = T)) %>%
   ggplot(aes(age, MARITAL)) +
   geom_point()
 
+png("marital.png")
+print(df_marital)
+dev.off()
+
+knitr::include_graphics("./marital.png")
 ```
 ---
 
@@ -462,10 +467,15 @@ df %>%
 df_marriage <- df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
-  summarize(age = mean(as.numeric(AGE), na.rm = T))
-  
-ggplot(df_marriage, aes(age, fct_reorder(MARITAL, age))) +
+  summarize(age = mean(as.numeric(AGE), na.rm = T)) %>%
+  ggplot(aes(age, fct_reorder(MARITAL, age))) +
   geom_point()
+
+png("marriage.png")
+print(df_marriage)
+dev.off()
+
+knitr::include_graphics("./marriage.png")
 ```
 
 ---
@@ -486,8 +496,15 @@ name: collapse
 #### Consider the income variable from our GSS as an example:
 
 ```{r}
-df %>% ggplot(aes(x = INCOME)) +
-    geom_bar()
+df_income <- df %>% 
+  ggplot(aes(x = INCOME)) +
+  geom_bar()
+
+png("income.png")
+print(df_income)
+dev.off()
+
+knitr::include_graphics("./income.png")
 ```
 ---
 # Change the value of levels:  *fct_collapse()*
@@ -503,8 +520,15 @@ df <- df %>%
                                         "middle" = c("$15000 - 19999", "$20000 - 24999"),
                                         "high" = c("$25000 OR MORE")))
 
-df %>% ggplot(aes(x = income_brackets)) +
-    geom_bar()
+df_income_brackets <- df %>% 
+  ggplot(aes(x = income_brackets)) +
+  geom_bar()
+
+png("brackets.png")
+print(df_income_brackets)
+dev.off()
+
+knitr::include_graphics("./brackets.png")
 ```
 ---
 # Change the value of levels:  *fct_collapse()*
@@ -527,7 +551,7 @@ df %>%
 
 #### Lumping levels that appear below a minimum frequency together into a single factor
 
-```{r}
+```{r, out.width = "300px"}
 df_relig <- df %>% 
   ggplot(aes(x = RELIG)) +
   geom_bar()
@@ -538,11 +562,11 @@ df_relig_new <- df %>%
   ggplot(aes(x = religion)) +
   geom_bar()
 
-pdf("relig1.pdf")
-print(df_relig)
+png("relig2.png")
+print(df_relig_new)
 dev.off()
 
-knitr::include_graphics("./relig1.pdf")
+knitr::include_graphics("./relig2.png")
 ```
 ---
 class: inverse, center, middle
