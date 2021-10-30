@@ -75,6 +75,7 @@ library(kableExtra)
       * [`levels()`](#levels)
       * [`fct_reorder`](#reorder)
       * [`fct_collapse`](#collapse)
+      * [`fct_lump`](#lump)
  
 6. [Summary](#summary)
  ]
@@ -433,7 +434,7 @@ name: reorder
 
 #### Let's see how it works.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, include=FALSE}
 df_marital <- df %>%
   na.omit(MARITAL) %>%
   group_by(MARITAL) %>%
@@ -444,9 +445,10 @@ df_marital <- df %>%
 png("marital.png")
 print(df_marital)
 dev.off()
+```
 
+```{r, echo=FALSE}
 knitr::include_graphics("./marital.png")
-
 ```
 ---
 
@@ -466,11 +468,13 @@ df_marriage <- df %>%
 ]
 
 .pull-right[
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, include=FALSE}
 png("marriage.png")
 print(df_marriage)
 dev.off()
+```
 
+```{r, echo = F}
 knitr::include_graphics("./marriage.png")
 ```
 ]
@@ -488,33 +492,67 @@ name: collapse
 * This is particularly useful when a factor has too many levels, especially if the level of granularity is too high.
 
 *  **`fct_collapse`** collapses levels into manually defined groups.
+*  **`fct_lump`** lumps levels that do not appear in the top n = number of times into "Other"
+
+---
+# Change the value of levels:  *fct_collapse()*
 
 #### Consider the income variable from our GSS as an example:
 
-```{r}
-df %>% 
+```{r, include=FALSE}
+df_income <- df %>% 
   ggplot(aes(x = INCOME)) +
+  geom_bar() +
   theme(axis.text.x = element_text(angle = 90))
+
+png("income.png")
+print(df_income)
+dev.off()
 ```
+
+```{r, echo=FALSE}
+knitr::include_graphics("./income.png")
+```
+
 ---
 # Change the value of levels:  *fct_collapse()*
 
 #### It makes more sense to recategorize the data according to income classes so we use **`fct_collapse`**:
-
+.pull-left-wide[
 ```{r}
-df <- df %>%
+df_brackets <- df %>%
   mutate(income_brackets = fct_collapse(INCOME, 
-                                        "low" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
-                                                  "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
-                                                  "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999"),
-                                        "middle" = c("$15000 - 19999", "$20000 - 24999"),
-                                        "high" = c("$25000 OR MORE")))
-
-df %>% ggplot(aes(x = income_brackets)) +
-    geom_bar()
+    "low" = c("LT $1000", "$1000 TO 2999", "$3000 TO 3999",
+    "$4000 TO 4999", "$5000 TO 5999", "$6000 TO 6999",
+    "$7000 TO 7999", "$8000 TO 9999", "$10000 - 14999"),
+    "middle" = c("$15000 - 19999", "$20000 - 24999"),
+    "high" = c("$25000 OR MORE")))
 ```
+
+]
+
+.pull-right-small[
+```{r, include=FALSE}
+df_brackets <- df_brackets %>%
+  ggplot(aes(x=income_brackets)) +
+  geom_bar()
+
+png("brackets.png")
+print(df_brackets)
+dev.off()
+```
+
+```{r, echo=FALSE, out.width="30%", out.height="30%"}
+knitr::include_graphics("./brackets.png")
+```
+
+```
+]
+
 ---
-# Change the value of levels:  *fct_collapse()*
+name: lump
+
+# Change the value of levels:  *fct_lump()*
 
 #### OR other groupings of data ranges:
 
@@ -527,18 +565,8 @@ df_relig <- df %>%
 png("relig1.png")
 print(df_relig)
 dev.off()
-
-df_relig_new <- df %>%
-  mutate(religion = fct_lump(RELIG, n = 4)) %>%
-  group_by(religion) %>%
-  ggplot(aes(x = religion)) +
-  geom_bar() +
-  theme(axis.text.x = element_text(angle = 90))
-
-png("relig2.png")
-print(df_relig_new)
-dev.off()
 ```
+
 
 ```{r, echo=FALSE}
 knitr::include_graphics("./relig1.png")
@@ -546,13 +574,33 @@ knitr::include_graphics("./relig1.png")
 
 ---
 
-# Change the value of levels:  *fct_collapse()*
+# Change the value of levels:  *fct_lump()*
 
 #### Lumping levels that appear below a minimum frequency together into a single factor
+
+.pull-left[
+```{r}
+df_relig_new <- df %>%
+  mutate(religion = fct_lump(RELIG, n = 4)) %>%
+  group_by(religion) %>%
+  ggplot(aes(x = religion)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+]
+
+.pull-right[
+```{r, include=F}
+png("relig2.png")
+print(df_relig_new)
+dev.off()
+```
 
 ```{r, echo=FALSE}
 knitr::include_graphics("./relig2.png")
 ```
+]
+
 ---
 class: inverse, center, middle
 name: summary
@@ -583,19 +631,18 @@ name: summary
 # Summary `r emo::ji("document")`
 
 ### Summary of **`forcats`** functions.
-
 <br>
 
 ```{r, include=FALSE}
-tab1 <- matrix(c('factor()', 'as_factor', 'fct_relevel', 'fct_count', 'fct_unique', 'levels()', 'fct_reorder', 'fct_collapse'), ncol=1, byrow=TRUE)
+tab1 <- matrix(c('factor()', 'as_factor()', 'fct_relevel()', 'fct_count()', 'fct_unique()', 'levels()', 'fct_reorder()', 'fct_collapse()', 'fct_lump()'), ncol=1, byrow=TRUE)
 colnames(tab1) <- c('Function')
-rownames(tab1) <- c('1','2','3','4','5','6','7','8')
+rownames(tab1) <- c('1','2','3','4','5','6','7','8', '9')
 tab1 <- as.table(tab1)
 
 
-tab2 <- matrix(c('Creates an ordered factor with assigned levels', 'Converts an input to a factor', 'Reorders de the levels of a factor', 'Counts entries in a factor', 'Removes duplicates', 'Returns the levels of a factor', 'Reorders a factor based on the value of another variable', 'Collapses levels into defined groups'), ncol=1, byrow=TRUE)
+tab2 <- matrix(c('Creates an ordered factor with assigned levels', 'Converts an input to a factor', 'Reorders de the levels of a factor', 'Counts entries in a factor', 'Removes duplicates', 'Returns the levels of a factor', 'Reorders a factor based on the value of another variable', 'Collapses levels into defined groups', 'Lumps together factor levels into "Other"'), ncol=1, byrow=TRUE)
 colnames(tab2) <- c('Description')
-rownames(tab2) <- c('','','','','','','','')
+rownames(tab2) <- c('','','','','','','','','')
 tab2 <- as.table(tab2)
 
 tab_factors <- cbind(tab1,tab2)
