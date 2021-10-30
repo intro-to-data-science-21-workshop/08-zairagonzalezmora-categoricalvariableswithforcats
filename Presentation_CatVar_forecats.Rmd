@@ -610,8 +610,6 @@ name: summary
 
 * Categorical variables assign units of observation (levels) to a particular category.
 
-* Factors are R's data structure for categorical data.
-
 * Factors reorder character vectors in non alphabetical order and improve display.
 
 * They allow to inspect levels in a more detailed way.

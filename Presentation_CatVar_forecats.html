@@ -155,7 +155,7 @@ name: factors
 
 ---
 
-# Factors 🔡
+# Factors 🔠
 
 ### What are factors?
 
@@ -308,13 +308,13 @@ R&gt; factor(country_sample, levels = members)
 ```
 
 ```
-##  [1] France      Netherlands Netherlands Italy       Ireland     Denmark    
-##  [7] Italy       Slovenia    Bulgaria    Netherlands Netherlands Latvia     
-## [13] France      Germany     Netherlands Greece      Croatia     Latvia     
-## [19] Croatia     Austria     Poland      France      Cyprus      Latvia     
-## [25] Belgium     Luxembourg  Portugal    Greece      Romania     Malta      
-## [31] Poland      Finland     Denmark     Ireland     Hungary     Sweden     
-## [37] France      Czechia     Slovakia    Malta      
+##  [1] Austria     Sweden      Sweden      Italy       Austria     Finland    
+##  [7] Luxembourg  Croatia     Hungary     Spain       Romania     France     
+## [13] Czechia     Netherlands Estonia     Poland      Spain       Portugal   
+## [19] Cyprus      Romania     Estonia     Slovakia    Latvia      Italy      
+## [25] Bulgaria    Italy       Austria     Belgium     Hungary     Czechia    
+## [31] Lithuania   Lithuania   Lithuania   Netherlands Hungary     Bulgaria   
+## [37] Romania     Finland     Germany     Poland     
 ## 27 Levels: Belgium France Germany Italy Luxembourg Netherlands ... Croatia
 ```
 
@@ -374,18 +374,18 @@ R&gt; fct_count(country_sample) %&gt;%
 ## # A tibble: 12 x 2
 ##    f            n
 ##    &lt;fct&gt;    &lt;int&gt;
-##  1 Austria      1
+##  1 Austria      3
 ##  2 Belgium      1
-##  3 Bulgaria     1
-##  4 Croatia      2
+##  3 Bulgaria     2
+##  4 Croatia      1
 ##  5 Cyprus       1
-##  6 Czechia      1
-##  7 Denmark      2
-##  8 Finland      1
-##  9 France       4
+##  6 Czechia      2
+##  7 Estonia      2
+##  8 Finland      2
+##  9 France       1
 ## 10 Germany      1
-## 11 Greece       2
-## 12 Hungary      1
+## 11 Hungary      3
+## 12 Italy        3
 ```
 ---
 name: levels
@@ -586,15 +586,13 @@ name: summary
 
 ---
 
-# Summary 📃
+# Summary 📄
 
 * Factors are R's data structure for categorical data.
 
 * Categorical data is a set or collection of categorical variables.
 
 * Categorical variables assign units of observation (levels) to a particular category.
-
-* Factors are R's data structure for categorical data.
 
 * Factors reorder character vectors in non alphabetical order and improve display.
 
@@ -603,7 +601,7 @@ name: summary
 * The **`forcats`** package provides useful tools to solve problems with factors.
 
 ---
-# Summary 📄
+# Summary 📜
 
 ### Summary of **`forcats`** functions.
 &lt;br&gt;
