@@ -14,8 +14,8 @@
 
 <title>Workshop 8. Categorical Variables with forcats</title>
 
-<script src="Exercises_files/header-attrs-2.11/header-attrs.js"></script>
-<script src="Exercises_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="Exercises_files/header-attrs-2.8/header-attrs.js"></script>
+<script src="Exercises_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="Exercises_files/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
 <script src="Exercises_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -59,7 +59,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -398,13 +397,12 @@ div.tocify {
 <li>Order the factors according to their relationship with another variable using <code>fct_reorder()</code>. Remember that this function takes two arguments: the factor we want reordered, and the variable according to which we want it reordered.</li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRITE YOUR CODE HERE</span></span></code></pre></div>
-<p>And that’s all for this workshop! 😢</p>
+<p>And that’s all for this workshop! 😭</p>
 </div>
 <div id="reminder" class="section level2">
 <h2>Reminder ⌚</h2>
 <ul>
-<li><p><code>forcats</code> let’s us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles!</p></li>
-<li><p>These exercises showed the basics, but in case of any doubt (or if you want to learn more), please consult the cheatsheet found here by blah blah.</p></li>
+<li><code>forcats</code> let’s us play around with factors in an easily accessible way, allowing us to manipulate categorical variables while still adhering to tidy principles! And remember: this package isn’t just for cats (bad pun)! It’s for factors, for you, and for me!</li>
 </ul>
 </div>
 
@@ -446,9 +444,6 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
